@@ -54,20 +54,23 @@
     --paper-50: #fbf7ef;
     --paper-100: #f3ebde;
     --white: #fffdf9;
-    --graphite-950: #222220;
+    --graphite-950: #30070e;
     --graphite-900: #2d2c2a;
     --graphite-700: #54514c;
     --graphite-500: #807b73;
     --line: rgba(45, 44, 42, 0.16);
-    --wine-850: #682233;
-    --wine-750: #842f43;
-    --wine-100: #ead8d9;
-    --forest-900: #263d36;
-    --forest-750: #34574d;
-    --forest-100: #dce6df;
-    --rose-sand: #ead9d4;
-    --sage: #dce4dd;
-    --brass: #c99a45;
+    --wine-850: #5c111e;
+    --wine-750: #991932;
+    --wine-100: #f3e3e6;
+    --forest-900: #5c111e;
+    --forest-750: #991932;
+    --forest-100: #f3e3e6;
+    --rose-sand: #edd6da;
+    --sage: #edd6da;
+    --brass: #d8b54a;
+    --gold-light: #f4e2a1;
+    --gold-deep: #a9772e;
+    --gold-gradient: linear-gradient(135deg, var(--gold-light) 0%, var(--brass) 55%, var(--gold-deep) 100%);
     --whatsapp: #147c46;
     --shadow-soft: 0 24px 70px rgba(45, 38, 31, 0.12);
     --shadow-card: 0 12px 30px rgba(45, 38, 31, 0.08);
@@ -185,66 +188,34 @@
 }
 
 @layer components {
+  /* Paleta única de marca: vinho e dourado em todo o site. As classes
+     theme-forest/bronze/plataforma continuam existindo no JSX (histórico),
+     mas agora resolvem para o mesmo acento — as páginas se diferenciam por
+     ícone, tipografia e composição, não por matiz. */
   .theme-wine,
+  .theme-forest,
+  .theme-bronze,
+  .theme-plataforma,
   .home-page {
     --accent: var(--wine-750);
     --accent-deep: var(--wine-850);
     --accent-soft: var(--wine-100);
   }
 
-  .theme-forest {
-    --accent: var(--forest-750);
-    --accent-deep: var(--forest-900);
-    --accent-soft: var(--forest-100);
-  }
-
-  /* Bronze é o acento real da jornada empresarial. Antes a página herdava
-     `theme-forest` e sobrescrevia só o acento, deixando restos verdes. */
-  .theme-bronze {
-    --accent: #8a6530;
-    --accent-deep: #4b3b25;
-    --accent-soft: #eee2c8;
-  }
-
-  /* Azul-petróleo: agrupa as três páginas de conta bloqueada como uma família,
-     sem sair da paleta sóbria do restante do site. */
-  .theme-plataforma {
-    --accent: #33566b;
-    --accent-deep: #1f3a49;
-    --accent-soft: #dbe5ea;
-  }
-
-  .theme-bronze .section--attention {
-    background: #ece3d2;
-  }
-
-  .theme-plataforma .section--attention {
-    background: var(--accent-soft);
-  }
-
-  .theme-plataforma .timeline li span {
-    background: var(--accent-soft);
-  }
-
-  .theme-plataforma .document-sheet {
-    background:
-      linear-gradient(90deg, transparent 46px, rgba(51,86,107,0.22) 47px, transparent 48px),
-      repeating-linear-gradient(to bottom, transparent 0, transparent 38px, rgba(45,44,42,0.08) 39px),
-      var(--paper-50);
-  }
-
   .service-hero--conta-bloqueada-mercado-livre,
   .service-hero--conta-bloqueada-instagram,
   .service-hero--conta-bloqueada-whatsapp {
     background:
-      radial-gradient(circle at 84% 22%, rgba(51,86,107,0.12), transparent 32%),
-      linear-gradient(135deg, var(--paper-50), #eef2f4 60%, var(--accent-soft));
+      radial-gradient(circle at 84% 22%, rgba(153,25,50,0.1), transparent 32%),
+      linear-gradient(135deg, var(--paper-50), #f5e9ea 60%, var(--accent-soft));
   }
 
+  /* O ouro também é marca: o wash da página de registro de marca puxa para
+     dourado em vez de vinho, mantendo as duas cores oficiais em jogo. */
   .service-hero--registro-de-marca {
     background:
-      radial-gradient(circle at 84% 22%, rgba(138,101,48,0.12), transparent 32%),
-      linear-gradient(135deg, var(--paper-50), #f4ecdc 60%, #ece3d2);
+      radial-gradient(circle at 84% 22%, rgba(216,181,74,0.16), transparent 32%),
+      linear-gradient(135deg, var(--paper-50), #f6ecd6 60%, #ecdfc0);
   }
 
   /* Header */
@@ -670,7 +641,7 @@
   /* Traço em brass na frase-chave do H1. Usa background em vez de ::after para
      acompanhar a quebra de linha. */
   .headline-mark {
-    background-image: linear-gradient(var(--brass), var(--brass));
+    background-image: linear-gradient(90deg, var(--gold-deep), var(--brass) 45%, var(--gold-light));
     background-repeat: no-repeat;
     background-position: 0 92%;
     background-size: 0% 4px;
@@ -744,7 +715,7 @@
     height: 4px;
     margin-inline: clamp(1.1rem, 2.4vw, 2rem);
     border-radius: var(--radius-circle);
-    background: rgba(201, 154, 69, 0.55);
+    background: rgba(216, 181, 74, 0.55);
   }
 
   .hero-grid {
@@ -820,13 +791,13 @@
   /* Service-specific first viewports */
   .service-hero--concursos {
     background:
-      linear-gradient(90deg, transparent 0, transparent calc(50% - 1px), rgba(132,47,67,0.045) 50%, transparent calc(50% + 1px)),
-      radial-gradient(circle at 84% 24%, rgba(132,47,67,0.1), transparent 30%),
+      linear-gradient(90deg, transparent 0, transparent calc(50% - 1px), rgba(153,25,50,0.045) 50%, transparent calc(50% + 1px)),
+      radial-gradient(circle at 84% 24%, rgba(153,25,50,0.1), transparent 30%),
       linear-gradient(135deg, var(--paper-50), #f4eadd 62%, #ead9d4);
   }
 
   .service-hero--concursos::before {
-    background-image: repeating-linear-gradient(90deg, transparent 0 79px, rgba(132,47,67,0.05) 80px);
+    background-image: repeating-linear-gradient(90deg, transparent 0 79px, rgba(153,25,50,0.05) 80px);
     background-size: auto;
     opacity: 1;
   }
@@ -834,8 +805,8 @@
   .service-hero--divida-ativa-empresas {
     color: var(--white);
     background:
-      radial-gradient(circle at 20% 20%, rgba(201,154,69,0.13), transparent 28%),
-      linear-gradient(125deg, #172722, var(--forest-900) 55%, #31554a);
+      radial-gradient(circle at 20% 20%, rgba(216,181,74,0.13), transparent 28%),
+      linear-gradient(125deg, var(--graphite-950), var(--wine-850) 55%, #7d2436);
   }
 
   .service-hero--divida-ativa-empresas::before {
@@ -868,14 +839,14 @@
 
   .service-hero--direito-empresarial {
     background:
-      linear-gradient(118deg, transparent 0 56%, rgba(201,154,69,0.11) 56% 57%, transparent 57%),
-      linear-gradient(90deg, var(--paper-50) 0 54%, #e4e8df 54% 100%);
+      linear-gradient(118deg, transparent 0 56%, rgba(216,181,74,0.16) 56% 57%, transparent 57%),
+      linear-gradient(90deg, var(--paper-50) 0 54%, #f4ecdc 54% 100%);
   }
 
   .service-hero--direito-empresarial::before {
     background-image:
-      linear-gradient(rgba(52,87,77,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(52,87,77,0.06) 1px, transparent 1px);
+      linear-gradient(rgba(153,25,50,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(153,25,50,0.05) 1px, transparent 1px);
     background-size: 32px 32px;
     mask-image: linear-gradient(90deg, transparent 0 50%, #000 63%);
     opacity: 1;
@@ -900,7 +871,7 @@
   /* Concursos: edital, ato e prazo */
   .contest-visual {
     padding: 66px 38px 76px;
-    border: 1px solid rgba(104,34,51,0.22);
+    border: 1px solid rgba(92,17,30,0.22);
     background: rgba(255,253,249,0.58);
     box-shadow: 0 30px 80px rgba(71,42,38,0.14);
   }
@@ -908,7 +879,7 @@
   .contest-visual::before {
     position: absolute;
     inset: 14px;
-    border: 1px solid rgba(132,47,67,0.12);
+    border: 1px solid rgba(153,25,50,0.12);
     content: "";
     pointer-events: none;
   }
@@ -1106,8 +1077,8 @@
     border: 1px solid rgba(255,255,255,0.16);
     color: var(--white);
     background:
-      radial-gradient(circle at 75% 22%, rgba(201,154,69,0.16), transparent 25%),
-      rgba(12,21,18,0.38);
+      radial-gradient(circle at 75% 22%, rgba(216,181,74,0.16), transparent 25%),
+      rgba(48,7,14,0.4);
     box-shadow: 0 30px 85px rgba(0,0,0,0.24);
   }
 
@@ -1132,8 +1103,8 @@
     width: 7px;
     height: 7px;
     border-radius: var(--radius-circle);
-    background: #8ac1a3;
-    box-shadow: 0 0 0 5px rgba(138,193,163,0.12);
+    background: var(--brass);
+    box-shadow: 0 0 0 5px rgba(216,181,74,0.18);
     animation: status-pulse 2.4s infinite;
   }
 
@@ -1146,7 +1117,7 @@
     padding: 20px;
     align-items: center;
     gap: 1rem;
-    border: 1px solid rgba(201,154,69,0.35);
+    border: 1px solid rgba(216,181,74,0.35);
     background: rgba(255,255,255,0.07);
   }
 
@@ -1203,7 +1174,7 @@
     border: 1px solid rgba(255,255,255,0.25);
     border-radius: var(--radius-circle);
     color: rgba(255,255,255,0.55);
-    background: #1c302a;
+    background: #3a1119;
   }
 
   .debt-route .is-complete > span {
@@ -1215,7 +1186,7 @@
     color: var(--graphite-950);
     background: var(--brass);
     border-color: var(--brass);
-    box-shadow: 0 0 0 8px rgba(201,154,69,0.1);
+    box-shadow: 0 0 0 8px rgba(216,181,74,0.1);
   }
 
   .debt-route p {
@@ -1264,18 +1235,18 @@
   /* Empresarial: arquitetura conectada */
   .business-visual {
     min-height: 590px;
-    border: 1px solid rgba(52,87,77,0.22);
+    border: 1px solid rgba(153,25,50,0.22);
     color: var(--graphite-950);
     background: rgba(255,253,249,0.76);
-    box-shadow: 0 30px 80px rgba(39,54,45,0.13);
+    box-shadow: 0 30px 80px rgba(45,10,18,0.13);
   }
 
   .business-visual::before {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(52,87,77,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(52,87,77,0.07) 1px, transparent 1px);
+      linear-gradient(rgba(153,25,50,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(153,25,50,0.07) 1px, transparent 1px);
     background-size: 30px 30px;
     content: "";
     mask-image: linear-gradient(to bottom, #000, transparent 92%);
@@ -1300,9 +1271,9 @@
     padding: 12px 14px;
     align-items: center;
     gap: 0.6rem;
-    border: 1px solid rgba(52,87,77,0.2);
+    border: 1px solid rgba(153,25,50,0.2);
     background: var(--white);
-    box-shadow: 0 10px 28px rgba(39,54,45,0.08);
+    box-shadow: 0 10px 28px rgba(45,10,18,0.08);
     font-size: var(--fs-xs);
     font-weight: 700;
     animation: node-in 520ms both ease-out;
@@ -1324,7 +1295,7 @@
     border-radius: var(--radius-circle);
     color: var(--white);
     background: var(--forest-900);
-    box-shadow: 0 0 0 12px rgba(52,87,77,0.08), 0 20px 45px rgba(38,61,54,0.24);
+    box-shadow: 0 0 0 12px rgba(153,25,50,0.08), 0 20px 45px rgba(45,10,18,0.24);
     transform: translateX(-50%);
     animation-name: core-in;
   }
@@ -1385,7 +1356,7 @@
     letter-spacing: 0.08em;
   }
 
-  .business-cycle i { height: 1px; flex: 1; margin-inline: 8px; background: rgba(52,87,77,0.25); }
+  .business-cycle i { height: 1px; flex: 1; margin-inline: 8px; background: rgba(153,25,50,0.25); }
 
   .brand-visual {
     position: relative;
@@ -1451,7 +1422,7 @@
     position: absolute;
     width: 52%;
     height: 70%;
-    border: 1px solid rgba(201,154,69,0.52);
+    border: 1px solid rgba(216,181,74,0.52);
     transform: rotate(7deg);
   }
 
@@ -1499,7 +1470,7 @@
 
   .section--paper {
     background:
-      radial-gradient(circle at 90% 12%, rgba(132, 47, 67, 0.055), transparent 25%),
+      radial-gradient(circle at 90% 12%, rgba(153, 25, 50, 0.055), transparent 25%),
       #f7f1e6;
   }
 
@@ -1512,14 +1483,6 @@
 
   .section--attention {
     background: var(--rose-sand);
-  }
-
-  .theme-forest .section--attention {
-    background: var(--sage);
-  }
-
-  .theme-bronze .section--attention {
-    background: #ece3d2;
   }
 
   .section--accent {
@@ -1677,24 +1640,10 @@
     padding: clamp(2rem, 5vw, 3.5rem);
     border: 1px solid rgba(45,44,42,0.24);
     background:
-      linear-gradient(90deg, transparent 46px, rgba(132,47,67,0.16) 47px, transparent 48px),
+      linear-gradient(90deg, transparent 46px, rgba(153,25,50,0.16) 47px, transparent 48px),
       repeating-linear-gradient(to bottom, transparent 0, transparent 38px, rgba(45,44,42,0.08) 39px),
       var(--paper-50);
     box-shadow: var(--shadow-card);
-  }
-
-  .theme-forest .document-sheet {
-    background:
-      linear-gradient(90deg, transparent 46px, rgba(52,87,77,0.2) 47px, transparent 48px),
-      repeating-linear-gradient(to bottom, transparent 0, transparent 38px, rgba(45,44,42,0.08) 39px),
-      var(--paper-50);
-  }
-
-  .theme-bronze .document-sheet {
-    background:
-      linear-gradient(90deg, transparent 46px, rgba(138,101,48,0.22) 47px, transparent 48px),
-      repeating-linear-gradient(to bottom, transparent 0, transparent 38px, rgba(45,44,42,0.08) 39px),
-      var(--paper-50);
   }
 
   .document-sheet--back {
@@ -1816,13 +1765,13 @@
     right: -26px;
     left: -26px;
     height: 100%;
-    background: rgba(201,154,69,0.09);
+    background: rgba(216,181,74,0.09);
     content: "";
   }
 
   .collection-map li.is-current i {
     background: var(--brass);
-    box-shadow: 0 0 0 6px rgba(201,154,69,0.12);
+    box-shadow: 0 0 0 6px rgba(216,181,74,0.12);
   }
 
   .collection-map__status {
@@ -1848,10 +1797,10 @@
     min-height: 520px;
     margin-inline: auto;
     overflow: hidden;
-    border: 1px solid rgba(52,87,77,0.22);
+    border: 1px solid rgba(153,25,50,0.22);
     background:
-      linear-gradient(rgba(52,87,77,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(52,87,77,0.07) 1px, transparent 1px),
+      linear-gradient(rgba(153,25,50,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(153,25,50,0.07) 1px, transparent 1px),
       #f5f3eb;
     background-size: 32px 32px;
     box-shadow: var(--shadow-soft);
@@ -1863,7 +1812,7 @@
     padding-inline: 24px;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(52,87,77,0.18);
+    border-bottom: 1px solid rgba(153,25,50,0.18);
     font-size: var(--fs-2xs);
     font-weight: 800;
     letter-spacing: 0.11em;
@@ -1884,8 +1833,8 @@
     padding: 32px 28px;
     align-content: start;
     gap: 2.2rem;
-    border-right: 1px solid rgba(52,87,77,0.15);
-    border-bottom: 1px solid rgba(52,87,77,0.15);
+    border-right: 1px solid rgba(153,25,50,0.15);
+    border-bottom: 1px solid rgba(153,25,50,0.15);
   }
 
   .business-blueprint__grid > div:nth-child(even) { border-right: 0; }
@@ -1905,7 +1854,7 @@
     border-radius: var(--radius-circle);
     color: var(--white);
     background: var(--forest-900);
-    box-shadow: 0 0 0 10px rgba(255,253,249,0.86), 0 14px 30px rgba(38,61,54,0.22);
+    box-shadow: 0 0 0 10px rgba(255,253,249,0.86), 0 14px 30px rgba(45,10,18,0.22);
     font-size: var(--fs-2xs);
     letter-spacing: 0.1em;
     transform: translate(-50%, -36%);
@@ -1917,7 +1866,7 @@
   .service-page--concursos .issue-card {
     border-top: 4px solid var(--wine-750);
     background:
-      linear-gradient(90deg, transparent 38px, rgba(132,47,67,0.08) 39px, transparent 40px),
+      linear-gradient(90deg, transparent 38px, rgba(153,25,50,0.08) 39px, transparent 40px),
       var(--white);
   }
 
@@ -1943,7 +1892,7 @@
 
   .service-page--direito-empresarial .issue-card {
     border-radius: var(--radius-lg);
-    background: linear-gradient(145deg, var(--white), #f0f1e9);
+    background: linear-gradient(145deg, var(--white), #f4e9ea);
   }
 
   .service-page--direito-empresarial .card-grid--three > .reveal:first-child .issue-card {
@@ -1960,7 +1909,7 @@
   }
 
   .service-paths--divida-ativa-empresas .path-card {
-    border-top: 1px solid rgba(201,154,69,0.45);
+    border-top: 1px solid rgba(216,181,74,0.45);
   }
 
   .service-paths--direito-empresarial .card-grid--paths {
@@ -1984,9 +1933,9 @@
 
   .service-timeline--direito-empresarial {
     background:
-      linear-gradient(rgba(52,87,77,0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(52,87,77,0.045) 1px, transparent 1px),
-      #ebe8da;
+      linear-gradient(rgba(153,25,50,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(153,25,50,0.045) 1px, transparent 1px),
+      #f2e5e2;
     background-size: 34px 34px;
   }
 
@@ -2000,7 +1949,7 @@
     border-radius: var(--radius-circle);
     color: var(--white);
     background: var(--forest-900);
-    box-shadow: 0 0 0 7px rgba(52,87,77,0.1);
+    box-shadow: 0 0 0 7px rgba(153,25,50,0.1);
   }
 
   /* CTA intermediário */
@@ -2090,14 +2039,6 @@
     background: var(--rose-sand);
     font-size: var(--fs-2xs);
     font-weight: 800;
-  }
-
-  .theme-forest .timeline li span {
-    background: var(--sage);
-  }
-
-  .theme-bronze .timeline li span {
-    background: #ece3d2;
   }
 
   .timeline li p {
@@ -2518,13 +2459,6 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  /* Cada carta carrega a cor da sua jornada — mesma lógica da barra de
-     autoridade. Antes só a do meio tinha fundo verde, o que lia como acidente. */
-  .area-grid > *:nth-child(1) .area-card { --card-accent: var(--wine-750); }
-  .area-grid > *:nth-child(2) .area-card { --card-accent: var(--forest-750); }
-  /* Bronze da página empresarial, não brass — o acento real daquela jornada. */
-  .area-grid > *:nth-child(3) .area-card { --card-accent: #8a6530; }
-
   .area-card {
     display: flex;
     min-height: 420px;
@@ -2618,7 +2552,7 @@
     padding: clamp(1.4rem, 2.6vw, 1.9rem);
     flex-direction: column;
     border: 1px solid var(--line);
-    border-top: 3px solid #33566b;
+    border-top: 3px solid var(--wine-750);
     border-radius: var(--radius-sm);
     background: var(--white);
     transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
@@ -2626,7 +2560,7 @@
 
   .platform-card > svg {
     margin-bottom: auto;
-    color: #33566b;
+    color: var(--wine-750);
   }
 
   .platform-card h4 {
@@ -2650,13 +2584,13 @@
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid var(--line);
-    color: #33566b;
+    color: var(--wine-750);
     font-size: var(--fs-sm);
     font-weight: 700;
   }
 
   .platform-card:hover {
-    border-color: #33566b;
+    border-color: var(--wine-750);
     box-shadow: var(--shadow-card);
     transform: translateY(-6px);
   }
@@ -2685,7 +2619,7 @@
     position: relative;
     padding: 5.5rem 0 1.6rem;
     color: var(--white);
-    background: #171716;
+    background: var(--graphite-950);
   }
 
   .site-footer__grid {
@@ -2948,7 +2882,7 @@
   .privacy-pending {
     margin-top: 1.6rem;
     padding: 1.1rem 1.25rem;
-    border: 1px solid rgba(138, 101, 48, 0.4);
+    border: 1px solid rgba(216, 181, 74, 0.4);
     border-left: 4px solid var(--brass);
     border-radius: var(--radius-sm);
     background: #fbf3e2;
@@ -3337,7 +3271,7 @@
     }
 
     .service-hero--direito-empresarial {
-      background: linear-gradient(168deg, var(--paper-50) 0 55%, #e4e8df 55% 100%);
+      background: linear-gradient(168deg, var(--paper-50) 0 55%, #f4ecdc 55% 100%);
     }
 
     .hero-visual {

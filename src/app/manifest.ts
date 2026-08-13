@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Advocacia em concursos públicos, dívida ativa, execução fiscal e direito empresarial.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f7f1e7",
-    theme_color: "#282725",
+    background_color: "#fbf7ef",
+    theme_color: "#30070e",
     lang: "pt-BR",
     // Ícones quadrados gerados por `icon.tsx` e `apple-icon.tsx`. O logo
     // original é retrato (375x603) e é rejeitado como ícone de aplicativo.

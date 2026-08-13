@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const ogSize = { width: 1200, height: 630 };
 
-type Palette = "wine" | "forest" | "bronze" | "plataforma";
+type Palette = "wine" | "gold";
 
 export type OgCard = {
   eyebrow: string;
@@ -12,11 +12,14 @@ export type OgCard = {
   palette?: Palette;
 };
 
+/**
+ * Paleta única de marca: vinho e dourado, sem variante por página. O cartão
+ * de registro de marca usa o wash dourado — as duas cores oficiais continuam
+ * em jogo sem introduzir um terceiro matiz.
+ */
 const palettes = {
-  wine: { accent: "#842f43", wash: "linear-gradient(135deg, #fbf7ef 0%, #f4eadd 58%, #ead9d4 100%)" },
-  forest: { accent: "#34574d", wash: "linear-gradient(135deg, #fbf7ef 0%, #eef0e8 58%, #dce6df 100%)" },
-  bronze: { accent: "#8a6530", wash: "linear-gradient(135deg, #fbf7ef 0%, #f4ecdc 58%, #ece3d2 100%)" },
-  plataforma: { accent: "#33566b", wash: "linear-gradient(135deg, #fbf7ef 0%, #eaeff2 58%, #dbe5ea 100%)" },
+  wine: { accent: "#991932", wash: "linear-gradient(135deg, #fbf7ef 0%, #f6e7ea 58%, #edd6da 100%)" },
+  gold: { accent: "#a9772e", wash: "linear-gradient(135deg, #fbf7ef 0%, #f6ecd6 58%, #ecdfc0 100%)" },
 };
 
 /**
@@ -42,42 +45,38 @@ export const ogCards = {
     title: "Antes de decidir, organize o quadro da empresa.",
     footer: "Inscrição · CDA · Citação · Bloqueio · Penhora · Certidão",
     alt: "Dívida ativa e execução fiscal para empresas — Ceres Rabelo",
-    palette: "forest",
   },
   "direito-empresarial": {
     eyebrow: "ADVOCACIA EMPRESARIAL",
     title: "Sua empresa mudou. A estrutura jurídica acompanhou?",
     footer: "Societário · Contratos · Compliance · Tributário · Marca",
     alt: "Advocacia empresarial — Ceres Rabelo",
-    palette: "bronze",
+    palette: "gold",
   },
   "conta-bloqueada-mercado-livre": {
     eyebrow: "CONTA BLOQUEADA NO MERCADO LIVRE",
     title: "Sua conta parou de vender e a explicação veio genérica.",
     footer: "Suspensão · Reputação · Repasse retido · Denúncia · Encerramento",
     alt: "Conta bloqueada no Mercado Livre — Ceres Rabelo",
-    palette: "plataforma",
   },
   "conta-bloqueada-instagram": {
     eyebrow: "CONTA DESATIVADA NO INSTAGRAM",
     title: "O perfil que você construiu por anos saiu do ar de uma vez.",
     footer: "Desativação · Perfil profissional · Invasão · Recurso",
     alt: "Conta desativada no Instagram — Ceres Rabelo",
-    palette: "plataforma",
   },
   "conta-bloqueada-whatsapp": {
     eyebrow: "NÚMERO BANIDO NO WHATSAPP",
     title: "O número que concentra seus contatos foi banido sem aviso.",
     footer: "Banimento · Conta comercial · Invasão · Revisão",
     alt: "Número banido no WhatsApp — Ceres Rabelo",
-    palette: "plataforma",
   },
   "registro-de-marca": {
     eyebrow: "REGISTRO DE MARCA",
     title: "Usar um nome há anos não é o mesmo que ter direito sobre ele.",
     footer: "Busca de anterioridade · Classe de Nice · Depósito · Oposição",
     alt: "Registro de marca no INPI — Ceres Rabelo",
-    palette: "bronze",
+    palette: "gold",
   },
 } as const satisfies Record<string, OgCard>;
 
@@ -125,7 +124,7 @@ export function renderOgImage({ eyebrow, title, footer, palette = "wine" }: OgCa
           >
             {title}
           </div>
-          <div style={{ display: "flex", marginTop: 28, width: 220, height: 5, background: "#c99a45" }} />
+          <div style={{ display: "flex", marginTop: 28, width: 220, height: 5, background: "#d8b54a" }} />
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>

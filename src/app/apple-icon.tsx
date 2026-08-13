@@ -15,10 +15,10 @@ export default function AppleIcon() {
           alignItems: "center",
           justifyContent: "center",
           gap: 10,
-          background: "#682233",
+          background: "#5c111e",
         }}
       >
-        <div style={{ color: "#c99a45", fontSize: 82, fontWeight: 600, letterSpacing: -2 }}>
+        <div style={{ color: "#d8b54a", fontSize: 82, fontWeight: 600, letterSpacing: -2 }}>
           CR
         </div>
         <div style={{ color: "rgba(255,255,255,0.62)", fontSize: 15, letterSpacing: 4 }}>
