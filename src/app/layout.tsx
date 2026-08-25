@@ -20,8 +20,8 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Ceres Rabelo Advocacia | Concursos e Direito Empresarial",
-    template: "%s | Ceres Rabelo",
+    default: "Rabelo e Machado Advocacia | Concursos e Direito Empresarial",
+    template: "%s | Rabelo e Machado Advocacia",
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -30,13 +30,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: siteConfig.name,
-    title: "Ceres Rabelo Advocacia",
+    title: "Rabelo e Machado Advocacia",
     description: siteConfig.description,
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ceres Rabelo Advocacia",
+    title: "Rabelo e Machado Advocacia",
     description: siteConfig.description,
   },
   robots: { index: true, follow: true },
@@ -51,7 +51,7 @@ const serviceCatalog = [
   {
     name: "Advocacia em concursos públicos",
     description:
-      "Análise de edital, atos da banca, eliminação, TAF, avaliação médica, cotas, investigação social, convocação e nomeação.",
+      "Análise de edital, decisões da banca, eliminação, TAF, avaliação médica, cotas, investigação social, convocação e nomeação.",
     path: "/concursos",
   },
   {
@@ -63,8 +63,32 @@ const serviceCatalog = [
   {
     name: "Direito empresarial",
     description:
-      "Atuação consultiva em relações societárias, contratos, compliance, questões tributárias e proteção de marca.",
+      "Atuação consultiva em relações societárias, contratos, regras internas, questões tributárias e proteção de marca.",
     path: "/direito-empresarial",
+  },
+  {
+    name: "Registro de marca",
+    description:
+      "Pesquisa de marcas anteriores, definição de classe, pedido de registro no INPI e acompanhamento de exigências e oposições.",
+    path: "/registro-de-marca",
+  },
+  {
+    name: "Conta bloqueada no Mercado Livre",
+    description:
+      "Análise de suspensão de conta, remoção de anúncios, retenção de repasses e encerramento unilateral pela plataforma.",
+    path: "/conta-bloqueada-mercado-livre",
+  },
+  {
+    name: "Conta desativada no Instagram",
+    description:
+      "Análise de desativação de perfil, perda de acesso por invasão e restrição em conta profissional.",
+    path: "/conta-bloqueada-instagram",
+  },
+  {
+    name: "Número banido no WhatsApp",
+    description:
+      "Análise de banimento definitivo, suspensão temporária e perda de acesso a contas pessoais, Business e API.",
+    path: "/conta-bloqueada-whatsapp",
   },
 ];
 
@@ -88,11 +112,20 @@ const structuredData = {
       "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       alternateName: siteConfig.shortName,
+      legalName: siteConfig.legalName,
+      taxID: siteConfig.cnpj,
       url: siteConfig.url,
       email: siteConfig.email,
       description: siteConfig.description,
       sameAs: [siteConfig.instagram],
-      founder: { "@id": `${siteConfig.url}/#ceres-rabelo` },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: siteConfig.address.street,
+        addressLocality: siteConfig.address.city,
+        addressRegion: siteConfig.address.state,
+        postalCode: siteConfig.address.zip,
+        addressCountry: siteConfig.address.country,
+      },
       areaServed: { "@type": "Country", name: "Brasil" },
       knowsAbout: [
         "Concursos públicos",
@@ -100,7 +133,12 @@ const structuredData = {
         "Dívida ativa",
         "Execução fiscal",
         "Direito empresarial",
+        "Direito societário",
         "Direito tributário",
+        "Registro de marca",
+        "Propriedade industrial",
+        "Direito do consumidor",
+        "Direito digital",
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -115,22 +153,6 @@ const structuredData = {
           },
         })),
       },
-    },
-    {
-      "@type": "Person",
-      "@id": `${siteConfig.url}/#ceres-rabelo`,
-      name: "Ceres Rabelo",
-      url: siteConfig.url,
-      jobTitle: "Advogada, professora e autora",
-      description:
-        "Advogada, mestra e doutoranda em Direito, professora no CERS e no Gran Cursos Online e autora.",
-      sameAs: [siteConfig.instagram],
-      worksFor: { "@id": `${siteConfig.url}/#organization` },
-      knowsAbout: [
-        "Concursos públicos",
-        "Direito administrativo",
-        "Direito empresarial",
-      ],
       ...(siteConfig.oab
         ? {
             hasCredential: {

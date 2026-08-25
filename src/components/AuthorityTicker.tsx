@@ -2,9 +2,11 @@
 
 import {
   BadgeCheck,
-  BookOpenText,
-  GraduationCap,
-  Presentation,
+  Building2,
+  CalendarClock,
+  Compass,
+  FileSearch,
+  MessageSquare,
   Scale,
   type LucideIcon,
 } from "lucide-react";
@@ -14,16 +16,17 @@ import { siteConfig } from "@/lib/site";
 type Credential = { icon: LucideIcon; label: string };
 
 /**
- * Apenas autoridade formal e verificável — o que o Provimento 205/2021 permite.
- * Nada de número de resultado, caso concreto, depoimento ou comparação.
+ * Compromissos de método, não credenciais de resultado — o Provimento 205/2021
+ * veda número de casos, depoimento e comparação. Também não repete os nomes das
+ * áreas, que já aparecem nos cards logo abaixo.
  */
 const credentials: Credential[] = [
-  { icon: Scale, label: "Advogada" },
-  { icon: GraduationCap, label: "Mestra em Direito" },
-  { icon: GraduationCap, label: "Doutoranda em Direito" },
-  { icon: Presentation, label: "Professora — CERS" },
-  { icon: Presentation, label: "Professora — Gran Cursos Online" },
-  { icon: BookOpenText, label: "Autora" },
+  { icon: FileSearch, label: "Documentos conferidos um a um" },
+  { icon: CalendarClock, label: "Prazos verificados desde o primeiro contato" },
+  { icon: Compass, label: "Trabalho definido antes de começar" },
+  { icon: Scale, label: "Atuação contenciosa e consultiva" },
+  { icon: Building2, label: "Atendimento a empresas e pessoas físicas" },
+  { icon: MessageSquare, label: "Retorno por WhatsApp ou e-mail" },
 ];
 
 function buildItems(): Credential[] {
@@ -70,7 +73,7 @@ export function AuthorityTicker() {
       ref={ref}
       className="authority-bar"
       data-running="true"
-      aria-label="Formação e atuação profissional"
+      aria-label="Como o escritório trabalha"
     >
       <div className="authority-bar__track">
         <Track items={items} />

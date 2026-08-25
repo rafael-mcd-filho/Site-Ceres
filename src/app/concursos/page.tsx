@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: "/concursos" },
   openGraph: {
-    title: "Advocacia em Concursos Públicos | Ceres Rabelo",
+    title: "Advocacia em Concursos Públicos | Rabelo e Machado Advocacia",
     description,
     url: "/concursos",
     images: ogImageFor("concursos"),

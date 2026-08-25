@@ -17,11 +17,11 @@ type ContactFormProps = {
 const initialState: ContactFormState = { status: "idle", message: "" };
 
 const contextualLabels = {
-  "Concursos públicos": "Concurso, cargo, banca e etapa",
-  "Dívida ativa e execução fiscal": "Empresa, órgão responsável e fase atual",
-  "Direito empresarial": "Segmento, assunto principal e eventual prazo",
-  "Conta bloqueada em plataforma": "Plataforma, tipo de conta e data do bloqueio",
-  "Registro de marca": "Nome pretendido, ramo de atividade e tempo de uso",
+  "Concursos públicos": "Qual concurso, cargo, banca e etapa?",
+  "Dívida ativa e execução fiscal": "Qual cobrança ou documento você recebeu?",
+  "Direito empresarial": "O que a empresa faz e o que está acontecendo?",
+  "Conta bloqueada em plataforma": "Qual plataforma e quando a conta foi bloqueada?",
+  "Registro de marca": "Qual nome pretendido e qual ramo de atividade?",
 };
 
 function track(event: string, details: Record<string, string>) {
@@ -162,7 +162,7 @@ export function ContactForm({ area, source }: ContactFormProps) {
             id={`context-${source}`}
             name="context"
             maxLength={240}
-            placeholder="Inclua apenas as informações iniciais"
+            placeholder="Só o essencial por enquanto"
           />
         </div>
       )}

@@ -42,7 +42,7 @@ export function InlineCta({ eyebrow, title, text, whatsappMessage, position }: I
             data-cta="whatsapp"
             data-cta-position={position}
           >
-            WhatsApp
+            Falar pelo WhatsApp
           </CtaButton>
         </div>
       </div>

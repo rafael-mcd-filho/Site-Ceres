@@ -1,6 +1,5 @@
 import {
   Activity,
-  ArrowRight,
   BadgeCheck,
   Boxes,
   BriefcaseBusiness,
@@ -28,7 +27,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { AuthorityTicker } from "@/components/AuthorityTicker";
-import { BrandVisual } from "@/components/BrandVisual";
 import { ContactForm } from "@/components/ContactForm";
 import { CtaButton } from "@/components/CtaButton";
 import { FaqList } from "@/components/FaqList";
@@ -79,7 +77,17 @@ function SectionHeading({ eyebrow, title, lead }: { eyebrow?: string; title: str
   );
 }
 
+/**
+ * Seis seções, na ordem das perguntas que o visitante faz: onde estou (hero),
+ * isso é o meu caso (situações), vocês entendem isso (leitura), o que pode ser
+ * feito (caminhos), e se… (dúvidas), como começo (começar).
+ */
 export function ServicePage({ config }: { config: ServiceConfig }) {
+  // Sem `mechanismItems`, a cronologia é o próprio diagnóstico: ela alimenta o
+  // visual e o trilho é omitido, para a sequência não aparecer duas vezes.
+  const mechanismItems = config.mechanismItems ?? config.timeline;
+  const showTimelineRail = Boolean(config.mechanismItems);
+
   return (
     <main id="topo" className={`service-page service-page--${config.slug} theme-${config.theme}`}>
       <section
@@ -112,14 +120,14 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
                 data-cta="whatsapp"
                 data-cta-position="hero"
               >
-                WhatsApp
+                Falar pelo WhatsApp
               </CtaButton>
             </div>
             <p className="hero-note"><span aria-hidden="true" />{config.heroNote}</p>
           </div>
           <div className="hero-visual hero-enter hero-enter--delay">
             <ServiceHeroVisual slug={config.slug} />
-            <div className="hero-tags" aria-label="Temas desta página">
+            <div className="hero-tags" aria-label="Temas desta atuação">
               {config.heroTags.map((tag) => <span key={tag}>{tag}</span>)}
             </div>
           </div>
@@ -150,13 +158,40 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
         </div>
       </section>
 
-      <section className={`section section--white service-mechanism service-mechanism--${config.slug}`} id="metodo">
-        <div className="container split-grid split-grid--mechanism">
+      <section className={`section section--white service-reading service-reading--${config.slug}`} id="metodo">
+        <div className="container">
+          <div className="reading-grid">
+            <Reveal>
+              <div className="section-heading reading-copy">
+                <p className="eyebrow">{config.mechanismEyebrow}</p>
+                <h2>{config.mechanismTitle}</h2>
+                <p>{config.mechanismText}</p>
+                {config.mechanismNote && <p>{config.mechanismNote}</p>}
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <ServiceMechanismVisual slug={config.slug} items={mechanismItems} />
+            </Reveal>
+          </div>
+
           <Reveal>
-            <SectionHeading eyebrow={config.mechanismEyebrow} title={config.mechanismTitle} lead={config.mechanismText} />
-          </Reveal>
-          <Reveal delay={100}>
-            <ServiceMechanismVisual slug={config.slug} items={config.mechanismItems} />
+            <div className="reading-timeline">
+              <div className="reading-timeline__intro">
+                <p className="eyebrow">CRONOLOGIA</p>
+                <h3>{config.timelineTitle}</h3>
+                <p>{config.timelineLead}</p>
+              </div>
+              {showTimelineRail && (
+                <ol className="timeline-rail">
+                  {config.timeline.map((item, index) => (
+                    <li key={item}>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <p>{item}</p>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </div>
           </Reveal>
         </div>
       </section>
@@ -189,81 +224,13 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
         position="meio"
       />
 
-      <section className={`section section--attention service-timeline service-timeline--${config.slug}`}>
-        <div className="container timeline-layout">
-          <Reveal><SectionHeading eyebrow="CRONOLOGIA" title={config.timelineTitle} lead={config.timelineLead} /></Reveal>
-          <Reveal delay={100}>
-            <ol className="timeline">
-              {config.timeline.map((item, index) => (
-                <li key={item}><span>{String(index + 1).padStart(2, "0")}</span><p>{item}</p></li>
-              ))}
-            </ol>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section section--white">
-        <div className="container split-grid authority-grid">
-          <Reveal><BrandVisual theme="graphite" label="Advocacia · Docência · Pesquisa" /></Reveal>
-          <Reveal delay={100}>
-            <div className="authority-copy">
-              <p className="eyebrow">QUEM CONDUZ A ANÁLISE</p>
-              <h2>{config.authorityTitle}</h2>
-              {config.authorityText.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              <div className="credential-row"><span>Advogada</span><span>Professora</span><span>Mestra</span><span>Escritora</span></div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section section--ink" id="como-funciona">
-        <div className="container">
-          <Reveal><SectionHeading eyebrow="PROCESSO" title={config.processTitle} /></Reveal>
-          <div className="process-grid">
-            {config.process.map((step, index) => (
-              <Reveal key={step.title} delay={index * 80}>
-                <article className="process-card">
-                  <span>0{index + 1}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--white" id="documentos">
-        <div className="container documents-layout">
-          <Reveal><SectionHeading eyebrow="PRIMEIROS ELEMENTOS" title={config.documentsTitle} lead={config.documentsLead} /></Reveal>
-          <Reveal delay={80}>
-            <ul className="document-checklist">
-              {config.documents.map((item) => (
-                <li key={item}>
-                  <Check size={17} aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
-      <InlineCta
-        eyebrow="ANTES DAS DÚVIDAS FREQUENTES"
-        title="Sua situação tem detalhes que uma página não alcança."
-        text="O retorno inicial serve para organizar informações e delimitar o que pode ser examinado — não para prometer resultado."
-        whatsappMessage={config.whatsappMessage}
-        position="pre-faq"
-      />
-
       <section className="section section--paper" id="duvidas">
         <div className="container faq-layout">
           <Reveal>
             <div className="faq-intro">
               <p className="eyebrow">PERGUNTAS FREQUENTES</p>
-              <h2>Informação ajuda a organizar. O caso concreto define a resposta.</h2>
-              <p>Estas respostas são gerais e não substituem a análise individual de documentos, fatos e prazos.</p>
+              <h2>As dúvidas que aparecem logo no primeiro contato.</h2>
+              <p>Uma data, um documento ou uma cláusula específica mudam a leitura inteira. Estas respostas são gerais e não substituem a análise individual do seu caso.</p>
             </div>
           </Reveal>
           <Reveal delay={80}><FaqList items={config.faq} /></Reveal>
@@ -271,32 +238,62 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
       </section>
 
       <section className="section contact-section" id="contato">
-        <div className="container contact-layout">
+        <div className="container">
           <Reveal>
-            <div className="contact-card"><ContactForm area={config.formArea} source={config.slug} /></div>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="contact-copy">
-              <p className="eyebrow">PRÓXIMO PASSO</p>
+            <div className="section-heading start-heading">
+              <p className="eyebrow">COMO COMEÇAR</p>
               <h2>{config.contactTitle}</h2>
               <p>{config.contactLead}</p>
-              <div className="contact-flow" aria-label="Fluxo do contato">
-                <span>informações</span><ArrowRight size={16} /><span>contexto</span><ArrowRight size={16} /><span>retorno</span>
-              </div>
-              <CtaButton
-                href={whatsappHref(config.whatsappMessage)}
-                seal="whatsapp"
-                variant="light"
-                external
-                id="cta-whatsapp-final"
-                data-event="whatsapp_click"
-                data-cta="whatsapp"
-                data-cta-position="final"
-              >
-                Continuar pelo WhatsApp
-              </CtaButton>
             </div>
           </Reveal>
+
+          <Reveal delay={60}>
+            <ol className="start-steps" aria-label={config.processTitle}>
+              {config.process.map((step, index) => (
+                <li key={step.title}>
+                  <span aria-hidden="true">0{index + 1}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+
+          <div className="start-layout">
+            <Reveal>
+              <div className="contact-card"><ContactForm area={config.formArea} source={config.slug} /></div>
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="start-aside">
+                <p className="eyebrow">{config.documentsTitle}</p>
+                <ul className="document-checklist">
+                  {config.documents.map((item) => (
+                    <li key={item}>
+                      <Check size={16} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="start-aside__note">{config.documentsLead}</p>
+                <p className="start-aside__trust">{config.trustNote}</p>
+                <CtaButton
+                  href={whatsappHref(config.whatsappMessage)}
+                  seal="whatsapp"
+                  variant="light"
+                  external
+                  className="start-aside__cta"
+                  id="cta-whatsapp-final"
+                  data-event="whatsapp_click"
+                  data-cta="whatsapp"
+                  data-cta-position="final"
+                >
+                  Falar com a equipe pelo WhatsApp
+                </CtaButton>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 

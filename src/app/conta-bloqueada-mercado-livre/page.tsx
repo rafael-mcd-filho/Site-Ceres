@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: "/conta-bloqueada-mercado-livre" },
   openGraph: {
-    title: "Conta Bloqueada no Mercado Livre | Ceres Rabelo",
+    title: "Conta Bloqueada no Mercado Livre | Rabelo e Machado Advocacia",
     description,
     url: "/conta-bloqueada-mercado-livre",
     images: ogImageFor("conta-bloqueada-mercado-livre"),

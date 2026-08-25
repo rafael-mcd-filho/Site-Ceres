@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Ceres Rabelo Advocacia",
-    short_name: "Ceres Rabelo",
+    name: "Rabelo e Machado Advocacia",
+    short_name: "Rabelo e Machado",
     description:
-      "Advocacia em concursos públicos, dívida ativa, execução fiscal e direito empresarial.",
+      "Escritório de advocacia com atuação em concursos públicos, dívida ativa, execução fiscal e direito empresarial.",
     start_url: "/",
     display: "standalone",
     background_color: "#fbf7ef",

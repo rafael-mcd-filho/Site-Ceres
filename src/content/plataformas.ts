@@ -40,32 +40,29 @@ export const mercadoLivre: ServiceConfig = {
     { icon: "refresh", title: "Recurso interno esgotado", text: "Os canais da própria plataforma já foram usados e a resposta não mudou." },
   ],
   mechanismEyebrow: "O QUE SUSTENTA A ANÁLISE",
-  mechanismTitle: "A relação com o marketplace é contratual e de consumo.",
+  mechanismTitle: "A mensagem automática é só o começo da análise.",
   mechanismText:
-    "A plataforma pode estabelecer regras, mas a aplicação delas se submete ao dever de informação e à boa-fé objetiva. O exame compara o que os termos preveem, o que foi comunicado e o que os registros mostram.",
+    "O motivo informado pela plataforma, o histórico da conta, os valores retidos, os anúncios afetados, os protocolos de atendimento e as respostas enviadas ajudam a entender o que realmente aconteceu. Só depois disso entra a base jurídica: a relação com a plataforma é ao mesmo tempo contratual e de consumo, o que impõe dever de informar o motivo e agir de boa-fé.",
   mechanismItems: ["Termos de uso aplicáveis", "Aviso efetivamente recebido", "Histórico e reputação", "Valores em aberto"],
-  pathsTitle: "Caminhos dependem do que a plataforma informou",
+  pathsTitle: "Os caminhos dependem do que a plataforma informou",
   pathsLead:
-    "Recurso interno, notificação e medida judicial atendem a momentos distintos. A pertinência de cada um depende do motivo alegado e dos registros disponíveis.",
+    "Recorrer dentro da plataforma, notificar formalmente e ir à Justiça atendem a momentos distintos. Qual deles cabe depende do motivo alegado e dos registros que você guardou.",
   paths: [
-    { icon: "search", title: "Leitura do bloqueio", text: "Motivo alegado, cláusula invocada, data e efeitos concretos sobre a operação." },
-    { icon: "handshake", title: "Via extrajudicial", text: "Canais internos, notificação e tentativa de solução direta com a plataforma." },
-    { icon: "landmark", title: "Via judicial", text: "Avaliação de fundamento, urgência e documentos quando o caminho direto se esgota." },
+    { icon: "search", title: "Leitura do bloqueio", text: "Motivo alegado, regra invocada pela plataforma, data e efeito concreto sobre a operação." },
+    { icon: "handshake", title: "Solução direta com a plataforma", text: "Canais internos, recurso e notificação formal antes de qualquer discussão judicial." },
+    { icon: "landmark", title: "Quando a Justiça precisa analisar", text: "Avaliação de fundamento, urgência e documentos quando o caminho direto se esgota." },
   ],
   timelineTitle: "A ordem dos fatos muda o que ainda é discutível",
   timelineLead:
     "Data do bloqueio, tentativas de contato e respostas recebidas formam a linha que sustenta qualquer discussão posterior. Guarde tudo, inclusive as mensagens automáticas.",
   timeline: ["Conta ativa", "Aviso ou restrição", "Recurso interno", "Resposta da plataforma", "Situação atual"],
-  authorityTitle: "Direito do consumidor e relação digital lidos com método.",
-  authorityText: [
-    "A discussão sobre conta bloqueada combina Código de Defesa do Consumidor, Marco Civil da Internet e os termos contratuais da própria plataforma.",
-    "Ceres Rabelo reúne advocacia, docência e pesquisa para organizar esses elementos e delimitar o que pode ser examinado em cada caso.",
-  ],
+  trustNote:
+    "O escritório confronta o aviso recebido com os termos de uso e com o histórico da conta para identificar o que sustenta uma discussão.",
   processTitle: "Como a análise começa",
   process: [
     { title: "Envie o aviso", text: "O texto recebido da plataforma, com a data e o tipo de conta afetada." },
     { title: "Reúna os registros", text: "Prints, protocolos, respostas do suporte e comprovantes de valores em aberto." },
-    { title: "Receba o retorno", text: "Fatos, prazos e caminhos possíveis são delimitados, sem garantia de reativação." },
+    { title: "Receba o retorno", text: "Você fica sabendo o que o aviso realmente diz, quais registros sustentam uma discussão e como tratar os valores retidos." },
   ],
   documentsTitle: "O que ajuda a iniciar a análise",
   documentsLead: "Use o formulário para o resumo. A orientação sobre o envio dos arquivos vem no retorno.",
@@ -76,10 +73,10 @@ export const mercadoLivre: ServiceConfig = {
     { question: "Já usei o recurso interno e não resolveu. Ainda posso analisar?", answer: "Sim. O esgotamento dos canais internos costuma ser um elemento relevante da própria análise, porque documenta a tentativa de solução direta." },
     { question: "Quanto tempo leva?", answer: "Varia conforme o caminho adotado, os documentos disponíveis e a tramitação aplicável. Não é adequado prometer prazo de resultado." },
     { question: "Conta pessoal e conta empresarial mudam a análise?", answer: "Podem mudar. O enquadramento da relação e os efeitos do bloqueio costumam ser diferentes quando a conta sustenta uma atividade econômica." },
-    { question: "A análise garante que a conta volta?", answer: "Não. A análise identifica o enquadramento jurídico e os caminhos possíveis, sem garantia de resultado." },
+    { question: "A análise garante que a conta volta?", answer: "Não. Reativar é decisão da plataforma ou do juízo, conforme o caminho adotado. O que a análise entrega é a leitura do motivo alegado, a força dos registros que você guardou e as providências cabíveis." },
   ],
   contactTitle: "Comece pelo aviso que você recebeu e pela data do bloqueio.",
-  contactLead: "Com esses dois elementos já é possível situar o caso e indicar o que examinar em seguida.",
+  contactLead: "Se tiver em mãos, reúna também os protocolos de atendimento, os valores retidos e as respostas enviadas pela plataforma. Com isso o primeiro retorno já sai com contexto.",
 };
 
 export const instagram: ServiceConfig = {
@@ -123,23 +120,20 @@ export const instagram: ServiceConfig = {
     "Contestação interna, notificação e medida judicial cumprem funções distintas. A escolha depende do motivo alegado e do que ficou registrado.",
   paths: [
     { icon: "search", title: "Leitura da desativação", text: "Diretriz citada, forma do aviso, data e efeito concreto sobre o uso do perfil." },
-    { icon: "handshake", title: "Via extrajudicial", text: "Formulários de contestação, canais oficiais e notificação à plataforma." },
-    { icon: "landmark", title: "Via judicial", text: "Avaliação de fundamento, urgência e prova quando os canais diretos se esgotam." },
+    { icon: "handshake", title: "Solução direta com a plataforma", text: "Formulários de contestação, canais oficiais e notificação formal ao Instagram." },
+    { icon: "landmark", title: "Quando a Justiça precisa analisar", text: "Avaliação de fundamento, urgência e prova quando os canais diretos se esgotam." },
   ],
   timelineTitle: "Registre antes que a evidência suma",
   timelineLead:
     "Prints do aviso, número dos protocolos e datas das tentativas são o que sustenta a narrativa depois. Guarde tudo antes de continuar tentando.",
   timeline: ["Perfil ativo", "Aviso ou desativação", "Contestação enviada", "Resposta recebida", "Situação atual"],
-  authorityTitle: "Relação digital analisada com base em documento, não em suposição.",
-  authorityText: [
-    "Casos de conta desativada combinam Código de Defesa do Consumidor, Marco Civil da Internet e as diretrizes contratuais da plataforma.",
+  trustNote:
     "A leitura técnica separa o que é regra da plataforma, o que é dever legal e o que depende de prova produzida pelo próprio usuário.",
-  ],
   processTitle: "Como a análise começa",
   process: [
     { title: "Envie o aviso", text: "O texto exibido pela plataforma, com data e tipo de perfil atingido." },
     { title: "Reúna os registros", text: "Prints, protocolos de contestação, e-mails recebidos e provas de titularidade." },
-    { title: "Receba o retorno", text: "Fatos, prazos e caminhos possíveis são delimitados, sem garantia de recuperação." },
+    { title: "Receba o retorno", text: "Você entende qual diretriz foi invocada, o que suas provas de titularidade sustentam e quais providências cabem." },
   ],
   documentsTitle: "O que ajuda a iniciar a análise",
   documentsLead: "Use o formulário para o resumo. A orientação sobre o envio dos arquivos vem no retorno.",
@@ -150,7 +144,7 @@ export const instagram: ServiceConfig = {
     { question: "Perdi o acesso porque invadiram minha conta. É o mesmo caso?", answer: "Não. Invasão envolve titularidade e segurança, com prova e caminho próprios. Por isso a origem da perda de acesso precisa ser identificada logo no início." },
     { question: "Já enviei recurso pelo aplicativo e não responderam. E agora?", answer: "O envio e a ausência de resposta são elementos relevantes, porque documentam a tentativa de solução pela via direta. Guarde os protocolos." },
     { question: "Consigo ser indenizado?", answer: "A existência de dano e o seu reconhecimento dependem do caso concreto, da prova produzida e do entendimento aplicável. Não é adequado antecipar esse resultado." },
-    { question: "A análise garante que o perfil volta?", answer: "Não. A análise identifica o enquadramento jurídico e os caminhos possíveis, sem garantia de resultado." },
+    { question: "A análise garante que o perfil volta?", answer: "Não. O restabelecimento depende da plataforma ou de decisão judicial. A análise mostra se houve informação adequada sobre o motivo, o que seus registros comprovam e qual via tem fundamento." },
   ],
   contactTitle: "Comece pelo print do aviso e pela data em que o perfil saiu do ar.",
   contactLead: "Com esses dois elementos já é possível situar o caso e indicar o que examinar em seguida.",
@@ -190,30 +184,27 @@ export const whatsapp: ServiceConfig = {
   mechanismEyebrow: "O QUE SUSTENTA A ANÁLISE",
   mechanismTitle: "Número banido é acesso perdido a um canal, não só a um aplicativo.",
   mechanismText:
-    "A discussão envolve os termos de serviço, o dever de informar o motivo da restrição e o efeito concreto da perda sobre quem depende daquele canal para trabalhar.",
+    "A discussão envolve os termos de serviço e o dever de informar o motivo da restrição. Quando o atendimento acontece por mensagem, o número deixa de ser conveniência e passa a ser meio de exercício da atividade.",
   mechanismItems: ["Mensagem exibida", "Tipo de conta", "Uso do número", "Pedidos de revisão"],
   pathsTitle: "Revisão interna, notificação ou medida judicial",
   pathsLead:
     "Cada caminho tem requisito próprio. O que define a escolha é o tipo de restrição, o registro do pedido de revisão e o efeito sobre a atividade.",
   paths: [
     { icon: "search", title: "Leitura do banimento", text: "Mensagem exibida, tipo de conta, data e efeito sobre o atendimento." },
-    { icon: "handshake", title: "Via extrajudicial", text: "Pedido de revisão pelo aplicativo, canais oficiais e notificação." },
-    { icon: "landmark", title: "Via judicial", text: "Avaliação de fundamento, urgência e prova quando a via direta se esgota." },
+    { icon: "handshake", title: "Solução direta com o aplicativo", text: "Pedido de revisão pelo próprio aplicativo, canais oficiais e notificação formal." },
+    { icon: "landmark", title: "Quando a Justiça precisa analisar", text: "Avaliação de fundamento, urgência e prova quando o caminho direto se esgota." },
   ],
   timelineTitle: "Print antes de desinstalar",
   timelineLead:
     "A tela com a mensagem de banimento costuma ser a prova mais direta do que aconteceu, e desaparece quando o aplicativo é removido do aparelho.",
   timeline: ["Número ativo", "Mensagem de restrição", "Pedido de revisão", "Resposta recebida", "Situação atual"],
-  authorityTitle: "Análise técnica de um canal que virou infraestrutura de trabalho.",
-  authorityText: [
-    "Quando o atendimento acontece por mensagem, o número deixa de ser conveniência e passa a ser meio de exercício da atividade.",
+  trustNote:
     "A análise organiza os termos aplicáveis, os registros disponíveis e o efeito concreto da restrição sobre quem depende daquele canal.",
-  ],
   processTitle: "Como a análise começa",
   process: [
     { title: "Envie a mensagem exibida", text: "O print da tela de banimento, com data e tipo de conta." },
     { title: "Reúna os registros", text: "Pedidos de revisão, protocolos, e-mails e comprovante de titularidade do número." },
-    { title: "Receba o retorno", text: "Fatos, prazos e caminhos possíveis são delimitados, sem garantia de restabelecimento." },
+    { title: "Receba o retorno", text: "Você sabe se a restrição é temporária ou definitiva, o que o print comprova e o que cabe para o seu tipo de conta." },
   ],
   documentsTitle: "O que ajuda a iniciar a análise",
   documentsLead: "Use o formulário para o resumo. A orientação sobre o envio dos arquivos vem no retorno.",
@@ -224,7 +215,7 @@ export const whatsapp: ServiceConfig = {
     { question: "Preciso pedir revisão pelo aplicativo antes?", answer: "O pedido de revisão documenta a tentativa de solução direta e costuma ser um elemento relevante. Guarde o protocolo e a resposta, se houver." },
     { question: "Recuperar o número recupera as conversas?", answer: "Histórico e backup seguem regras próprias do aplicativo e do aparelho, que são independentes da discussão sobre o acesso à conta." },
     { question: "Alguém registrou meu número em outro aparelho. É o mesmo caso?", answer: "Não. Isso envolve titularidade da linha e segurança, com prova e caminho próprios. A origem da perda precisa ser identificada no início." },
-    { question: "A análise garante que o número volta?", answer: "Não. A análise identifica o enquadramento jurídico e os caminhos possíveis, sem garantia de resultado." },
+    { question: "A análise garante que o número volta?", answer: "Não. A liberação depende do aplicativo ou de decisão judicial. A análise separa suspensão temporária de banimento definitivo, verifica o que ficou registrado e indica a via com fundamento." },
   ],
   contactTitle: "Comece pelo print da mensagem e pela data do banimento.",
   contactLead: "Com esses dois elementos já é possível situar o caso e indicar o que examinar em seguida.",

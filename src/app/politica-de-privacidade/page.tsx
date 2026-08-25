@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Política de Privacidade",
   description:
-    "Como o site Ceres Rabelo Advocacia trata dados pessoais: finalidades, bases legais, compartilhamento, retenção e direitos do titular.",
+    "Como o site do escritório Rabelo e Machado Advocacia trata dados pessoais: finalidades, bases legais, compartilhamento, retenção e direitos do titular.",
   alternates: { canonical: "/politica-de-privacidade" },
 };
 
@@ -28,12 +28,12 @@ const sections: Secao[] = [
     id: "controlador",
     title: "1. Quem é o controlador dos dados",
     paragraphs: [
-      "O controlador é a pessoa ou entidade que decide como e por que os dados pessoais são tratados. Para os dados coletados neste site, o controlador é Ceres Rabelo Advocacia.",
+      "O controlador é a pessoa ou entidade que decide como e por que os dados pessoais são tratados. Para os dados coletados neste site, o controlador é Ceres Rabelo Sociedade Individual de Advocacia, inscrita no CNPJ sob o nº 60.663.618/0001-63, que atua sob o nome empresarial Rabelo e Machado Advocacia.",
+      "Endereço profissional: Rua Manoel Maia Neto, 25, Casusa, Princesa Isabel/PB, CEP 58.755-000.",
     ],
     pending: [
-      "Razão social completa e CNPJ (ou CPF, se a atuação for como profissional autônoma).",
-      "Endereço profissional a ser divulgado.",
-      "Confirmação de quem responde formalmente como controlador.",
+      "Número de inscrição da sociedade na OAB, exigido pelo Provimento 205/2021.",
+      "Confirmação do canal oficial de contato do titular (o e-mail do cartão CNPJ difere do divulgado no site).",
     ],
   },
   {
@@ -206,7 +206,7 @@ export default function PrivacyPage() {
 
       <div className="container privacy-layout">
         <aside className="privacy-summary">
-          <p className="footer-label">Nesta página</p>
+          <p className="footer-label">Sumário</p>
           <nav aria-label="Sumário da Política de privacidade">
             {sections.map((section) => (
               <a key={section.id} href={`#${section.id}`}>{section.title}</a>

@@ -26,7 +26,7 @@ const steps = [
   {
     icon: CalendarClock,
     title: "Delimitação dos próximos passos",
-    text: "Com o quadro organizado, é possível dizer o que pode ser examinado — sem promessa de resultado.",
+    text: "Você fica sabendo em que ponto o caso está, quais prazos correm e o que é possível fazer a partir daí.",
   },
 ];
 

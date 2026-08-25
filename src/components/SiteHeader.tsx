@@ -101,7 +101,7 @@ export function SiteHeader() {
         className={`site-header ${scrolled ? "is-scrolled" : ""} ${open ? "is-menu-open" : ""}`}
       >
         <div className="site-header__inner container">
-        <Link href="/" className="brand" aria-label="Ceres Rabelo Advocacia — início">
+        <Link href="/" className="brand" aria-label="Rabelo e Machado Advocacia — início">
           <Image
             src="/images/logo-ceres-rabelo.png"
             alt=""
@@ -111,7 +111,7 @@ export function SiteHeader() {
             className="brand__mark"
           />
           <span className="brand__text">
-            <strong>Ceres Rabelo</strong>
+            <strong>Rabelo e Machado</strong>
             <small>Advocacia</small>
           </span>
         </Link>
@@ -233,7 +233,7 @@ export function SiteHeader() {
             Falar pelo WhatsApp
           </CtaButton>
           <p>
-            Advocacia · Docência · Pesquisa
+            Escritório de advocacia
             {siteConfig.oab ? ` · OAB/PB ${siteConfig.oab}` : ""}
           </p>
         </div>

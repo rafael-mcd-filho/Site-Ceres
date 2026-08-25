@@ -29,53 +29,53 @@ const palettes = {
  */
 export const ogCards = {
   home: {
-    eyebrow: "CERES RABELO ADVOCACIA",
+    eyebrow: "RABELO E MACHADO ADVOCACIA",
     title: "Clareza para compreender. Método para decidir o próximo passo.",
-    footer: "Concursos públicos · Dívida ativa e execução fiscal · Direito empresarial",
-    alt: "Ceres Rabelo Advocacia — concursos públicos, dívida ativa e direito empresarial",
+    footer: "Concursos · Dívida ativa · Empresarial · Marca · Contas bloqueadas",
+    alt: "Rabelo e Machado Advocacia — concursos públicos, dívida ativa e direito empresarial",
   },
   concursos: {
     eyebrow: "ADVOCACIA EM CONCURSOS PÚBLICOS",
-    title: "Edital, ato da banca e prazo contam a mesma história.",
+    title: "Uma decisão no concurso mudou o caminho que você vinha construindo?",
     footer: "Eliminação · TAF · Avaliação médica · Cotas · Investigação social · Nomeação",
-    alt: "Advocacia em concursos públicos — Ceres Rabelo",
+    alt: "Advocacia em concursos públicos — Rabelo e Machado Advocacia",
   },
   "divida-ativa-empresas": {
     eyebrow: "DÍVIDA ATIVA E EXECUÇÃO FISCAL",
-    title: "Antes de decidir, organize o quadro da empresa.",
+    title: "Sua empresa recebeu uma cobrança, uma citação ou teve valores bloqueados?",
     footer: "Inscrição · CDA · Citação · Bloqueio · Penhora · Certidão",
-    alt: "Dívida ativa e execução fiscal para empresas — Ceres Rabelo",
+    alt: "Dívida ativa e execução fiscal para empresas — Rabelo e Machado Advocacia",
   },
   "direito-empresarial": {
     eyebrow: "ADVOCACIA EMPRESARIAL",
-    title: "Sua empresa mudou. A estrutura jurídica acompanhou?",
-    footer: "Societário · Contratos · Compliance · Tributário · Marca",
-    alt: "Advocacia empresarial — Ceres Rabelo",
+    title: "Sua empresa mudou. Os contratos e o acordo entre os sócios acompanharam?",
+    footer: "Sócios · Contrato social · Contratos · Regras internas · Marca",
+    alt: "Advocacia empresarial — Rabelo e Machado Advocacia",
     palette: "gold",
   },
   "conta-bloqueada-mercado-livre": {
     eyebrow: "CONTA BLOQUEADA NO MERCADO LIVRE",
     title: "Sua conta parou de vender e a explicação veio genérica.",
     footer: "Suspensão · Reputação · Repasse retido · Denúncia · Encerramento",
-    alt: "Conta bloqueada no Mercado Livre — Ceres Rabelo",
+    alt: "Conta bloqueada no Mercado Livre — Rabelo e Machado Advocacia",
   },
   "conta-bloqueada-instagram": {
     eyebrow: "CONTA DESATIVADA NO INSTAGRAM",
     title: "O perfil que você construiu por anos saiu do ar de uma vez.",
     footer: "Desativação · Perfil profissional · Invasão · Recurso",
-    alt: "Conta desativada no Instagram — Ceres Rabelo",
+    alt: "Conta desativada no Instagram — Rabelo e Machado Advocacia",
   },
   "conta-bloqueada-whatsapp": {
     eyebrow: "NÚMERO BANIDO NO WHATSAPP",
     title: "O número que concentra seus contatos foi banido sem aviso.",
     footer: "Banimento · Conta comercial · Invasão · Revisão",
-    alt: "Número banido no WhatsApp — Ceres Rabelo",
+    alt: "Número banido no WhatsApp — Rabelo e Machado Advocacia",
   },
   "registro-de-marca": {
     eyebrow: "REGISTRO DE MARCA",
     title: "Usar um nome há anos não é o mesmo que ter direito sobre ele.",
-    footer: "Busca de anterioridade · Classe de Nice · Depósito · Oposição",
-    alt: "Registro de marca no INPI — Ceres Rabelo",
+    footer: "Pesquisa prévia · Classe de Nice · Pedido no INPI · Oposição",
+    alt: "Registro de marca no INPI — Rabelo e Machado Advocacia",
     palette: "gold",
   },
 } as const satisfies Record<string, OgCard>;
@@ -140,7 +140,7 @@ export function renderOgImage({ eyebrow, title, footer, palette = "wine" }: OgCa
               paddingLeft: 32,
             }}
           >
-            ADVOCACIA · DOCÊNCIA · PESQUISA
+            RABELO E MACHADO ADVOCACIA
           </div>
         </div>
       </div>

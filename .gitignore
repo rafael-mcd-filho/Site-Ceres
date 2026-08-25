@@ -43,6 +43,7 @@ next-env.d.ts
 Thumbs.db
 .idea/
 .vscode/
+.claude/settings.local.json
 
 # Reproducible document renders
 docs/99-referencias/renders-pdf/

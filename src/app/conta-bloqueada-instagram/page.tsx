@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: "/conta-bloqueada-instagram" },
   openGraph: {
-    title: "Conta do Instagram Desativada | Ceres Rabelo",
+    title: "Conta do Instagram Desativada | Rabelo e Machado Advocacia",
     description,
     url: "/conta-bloqueada-instagram",
     images: ogImageFor("conta-bloqueada-instagram"),

@@ -4,14 +4,14 @@ import { ServicePage } from "@/components/ServicePage";
 import { registroDeMarca } from "@/content/marca";
 
 const description =
-  "Busca de anterioridade, classe de Nice, depósito no INPI e acompanhamento de exigências e oposições até a decisão.";
+  "Usa um nome e quer protegê-lo? Pesquisa de marcas anteriores, escolha da classe, pedido de registro no INPI e acompanhamento de exigências e oposições até a decisão.";
 
 export const metadata: Metadata = {
   title: "Registro de Marca no INPI",
   description,
   alternates: { canonical: "/registro-de-marca" },
   openGraph: {
-    title: "Registro de Marca no INPI | Ceres Rabelo",
+    title: "Registro de Marca no INPI | Rabelo e Machado Advocacia",
     description,
     url: "/registro-de-marca",
     images: ogImageFor("registro-de-marca"),

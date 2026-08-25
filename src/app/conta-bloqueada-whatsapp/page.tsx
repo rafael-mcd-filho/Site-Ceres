@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: "/conta-bloqueada-whatsapp" },
   openGraph: {
-    title: "Número Banido no WhatsApp | Ceres Rabelo",
+    title: "Número Banido no WhatsApp | Rabelo e Machado Advocacia",
     description,
     url: "/conta-bloqueada-whatsapp",
     images: ogImageFor("conta-bloqueada-whatsapp"),

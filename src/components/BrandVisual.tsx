@@ -5,16 +5,16 @@ type BrandVisualProps = {
   label?: string;
 };
 
-export function BrandVisual({ theme = "wine", label = "Advocacia · Docência · Pesquisa" }: BrandVisualProps) {
+export function BrandVisual({ theme = "wine", label = "Escritório · Método · Contexto" }: BrandVisualProps) {
   return (
     <div className={`brand-visual brand-visual--${theme}`} aria-label={label}>
-      <span className="brand-visual__index">CR — 01</span>
+      <span className="brand-visual__index">RM — 01</span>
       <div className="brand-visual__paper" aria-hidden="true" />
       <Image
         src="/images/logo-ceres-rabelo.png"
-        alt="Ceres Rabelo Advocacia"
+        alt="Rabelo e Machado Advocacia"
         width={176}
-        height={283}
+        height={261}
         sizes="176px"
         priority
         className="brand-visual__logo"

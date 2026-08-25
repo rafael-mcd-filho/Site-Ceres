@@ -119,7 +119,7 @@ export async function submitContact(
       body: JSON.stringify({
         from,
         to: [to],
-        subject: `[Site Ceres Rabelo] Novo contato — ${area}`,
+        subject: `[Site Rabelo e Machado] Novo contato — ${area}`,
         text: lines.join("\n"),
         reply_to: email || undefined,
       }),

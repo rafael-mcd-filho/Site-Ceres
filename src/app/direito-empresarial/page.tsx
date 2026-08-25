@@ -4,14 +4,14 @@ import { ServicePage } from "@/components/ServicePage";
 import { empresarial } from "@/content/services";
 
 const description =
-  "Atuação em direito societário, contratos, compliance, questões tributárias e proteção de marca para empresas e sócios.";
+  "Entrada e saída de sócio, conflito na sociedade, contrato social e contratos empresariais: atuação em direito societário e empresarial para empresas e sócios.";
 
 export const metadata: Metadata = {
   title: "Advocacia Empresarial",
   description,
   alternates: { canonical: "/direito-empresarial" },
   openGraph: {
-    title: "Advocacia Empresarial | Ceres Rabelo",
+    title: "Advocacia Empresarial | Rabelo e Machado Advocacia",
     description,
     url: "/direito-empresarial",
     images: ogImageFor("direito-empresarial"),

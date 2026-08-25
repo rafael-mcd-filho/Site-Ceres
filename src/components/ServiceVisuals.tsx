@@ -23,7 +23,7 @@ function ConcursoHeroVisual() {
     <div
       className="service-visual contest-visual"
       role="img"
-      aria-label="Representação de um edital sendo comparado com o ato da banca, a etapa do concurso e o prazo"
+      aria-label="Representação de um edital sendo comparado com a decisão da banca, a etapa do concurso e o prazo"
     >
       <div className="contest-visual__caption"><span>LEITURA DO CASO</span><strong>01 / 03</strong></div>
       <div className="contest-document contest-document--back" aria-hidden="true" />
@@ -39,14 +39,14 @@ function ConcursoHeroVisual() {
         </div>
         <div className="document-lines document-lines--short"><i /><i /></div>
       </div>
-      <div className="contest-stamp" aria-hidden="true">ATO SOB<br />ANÁLISE</div>
+      <div className="contest-stamp" aria-hidden="true">DECISÃO SOB<br />ANÁLISE</div>
       <div className="contest-deadline" aria-hidden="true">
         <CalendarClock size={21} />
         <span><small>ELEMENTO CRÍTICO</small><strong>DATA E PRAZO</strong></span>
       </div>
       <div className="contest-rail" aria-hidden="true">
         <span className="is-done"><i />Edital</span>
-        <span className="is-active"><i />Ato</span>
+        <span className="is-active"><i />Decisão</span>
         <span><i />Resposta</span>
       </div>
     </div>
@@ -58,7 +58,7 @@ function DividaHeroVisual() {
     <div
       className="service-visual debt-visual"
       role="img"
-      aria-label="Mapa da cobrança mostrando a passagem da origem do crédito para a CDA, execução fiscal e possível impacto na empresa"
+      aria-label="Mapa da cobrança mostrando o caminho de onde a dívida surgiu até a CDA, a execução fiscal e o possível impacto na empresa"
     >
       <div className="debt-visual__top">
         <span>MAPA DA COBRANÇA</span>
@@ -89,7 +89,7 @@ function EmpresarialHeroVisual() {
     <div
       className="service-visual business-visual"
       role="img"
-      aria-label="Arquitetura jurídica de uma empresa conectando relações societárias, contratos, compliance e crescimento"
+      aria-label="Arquitetura jurídica de uma empresa conectando sócios, contratos, regras internas e crescimento"
     >
       <div className="business-visual__top">
         <span>ARQUITETURA DO NEGÓCIO</span>
@@ -99,7 +99,7 @@ function EmpresarialHeroVisual() {
         <div className="business-node business-node--core"><Building2 size={27} /><strong>EMPRESA</strong><small>operação real</small></div>
         <div className="business-node business-node--socios"><Users size={18} /><span>Sócios</span></div>
         <div className="business-node business-node--contratos"><FileText size={18} /><span>Contratos</span></div>
-        <div className="business-node business-node--compliance"><ShieldCheck size={18} /><span>Compliance</span></div>
+        <div className="business-node business-node--compliance"><ShieldCheck size={18} /><span>Regras internas</span></div>
         <div className="business-node business-node--crescimento"><TrendingUp size={18} /><span>Crescimento</span></div>
         <i className="network-line network-line--one" />
         <i className="network-line network-line--two" />
@@ -108,7 +108,7 @@ function EmpresarialHeroVisual() {
       </div>
       <div className="business-decision" aria-hidden="true">
         <BadgeCheck size={21} />
-        <p><small>DECISÃO CENTRAL</small><strong>A estrutura acompanha a nova fase?</strong></p>
+        <p><small>DECISÃO CENTRAL</small><strong>Os documentos acompanham a fase de agora?</strong></p>
       </div>
       <div className="business-cycle" aria-hidden="true"><span>INÍCIO</span><i /><span>CRESCIMENTO</span><i /><span>REORGANIZAÇÃO</span></div>
     </div>
@@ -153,7 +153,7 @@ export function ServiceMechanismVisual({ slug, items }: ServiceVisualProps) {
 
   return (
     <div className="business-blueprint" aria-hidden="true">
-      <div className="business-blueprint__head"><span>MAPA DE DECISÃO</span><small>CONTEXTO → ESTRUTURA</small></div>
+      <div className="business-blueprint__head"><span>MAPA DE DECISÃO</span><small>SITUAÇÃO → DECISÃO</small></div>
       <div className="business-blueprint__grid">
         {items.map((item, index) => (
           <div key={item}><span>0{index + 1}</span><p>{item}</p></div>
