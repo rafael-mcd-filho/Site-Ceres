@@ -263,8 +263,8 @@ export default function Home() {
           <Reveal>
             <figure className="office-photo">
               <Image
-                src="/images/ceres/office.webp"
-                alt="Ambiente de escritório com mesa de atendimento, cadeiras e estante jurídica"
+                src="/images/ceres/office-consultation-v2.png"
+                alt="Advogada em atendimento, ouvindo a cliente e analisando documentos"
                 fill
                 sizes="(max-width: 760px) calc(100vw - 30px), 420px"
               />
