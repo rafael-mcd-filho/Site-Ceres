@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin } from "lucide-react";
-import { InstagramIcon } from "@/components/InstagramIcon";
+import { ArrowUpRight, Clock3, MapPin } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
-import { defaultWhatsAppMessage, siteConfig, whatsappHref } from "@/lib/site";
+import {
+  defaultWhatsAppMessage,
+  siteConfig,
+  whatsappHref,
+  whatsappMessageWithSource,
+} from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -19,8 +23,8 @@ export function SiteFooter() {
             style={{ height: "auto" }}
           />
           <p>
-            Escritório de advocacia com atuação orientada por clareza, método e
-            atenção ao contexto de cada situação.
+            Orientação jurídica para pessoas e empresas que precisam entender o
+            problema antes de decidir o próximo passo.
           </p>
         </div>
 
@@ -47,29 +51,23 @@ export function SiteFooter() {
           <p className="footer-label">Contato</p>
           <ul className="footer-links">
             <li>
-              <a href={whatsappHref(defaultWhatsAppMessage)} target="_blank" rel="noreferrer">
-                <WhatsAppIcon size={15} /> WhatsApp
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${siteConfig.email}`}>
-                <Mail size={15} aria-hidden="true" /> {siteConfig.email}
-              </a>
-            </li>
-            <li>
-              <a href={siteConfig.instagram} target="_blank" rel="noreferrer">
-                <InstagramIcon size={15} /> @profa.ceresrabelo
+              <a
+                href={whatsappHref(
+                  whatsappMessageWithSource(defaultWhatsAppMessage, "rodapé geral do site"),
+                )}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <WhatsAppIcon size={15} /> WhatsApp {siteConfig.whatsappDisplay}
               </a>
             </li>
             <li className="footer-address">
+              <Clock3 size={15} aria-hidden="true" />
+              <span>Segunda a sexta · horário comercial · retorno médio em 24 horas</span>
+            </li>
+            <li className="footer-address">
               <MapPin size={15} aria-hidden="true" />
-              <address>
-                {siteConfig.address.street}
-                <br />
-                {siteConfig.address.district} · {siteConfig.address.city}/{siteConfig.address.state}
-                <br />
-                CEP {siteConfig.address.zip}
-              </address>
+              <span>Online em todo o Brasil · presencial em {siteConfig.address.city}/{siteConfig.address.state}</span>
             </li>
           </ul>
         </div>
@@ -89,10 +87,10 @@ export function SiteFooter() {
 
       <div className="container site-footer__bottom">
         <p>
-          © {new Date().getFullYear()} {siteConfig.name} — {siteConfig.legalName} · CNPJ {siteConfig.cnpj}
+          © {new Date().getFullYear()} {siteConfig.name} · CNPJ {siteConfig.cnpj}
           {siteConfig.oab ? ` · OAB/PB ${siteConfig.oab}` : ""}
         </p>
-        <p>Conteúdo meramente informativo, sem oferta de serviços. Cada caso exige análise individual.</p>
+        <p>Conteúdo informativo. Cada situação exige análise individual e nenhum resultado pode ser garantido.</p>
       </div>
     </footer>
   );

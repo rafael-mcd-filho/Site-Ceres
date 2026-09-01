@@ -4,7 +4,7 @@ import { ServicePage } from "@/components/ServicePage";
 import { dividaAtiva } from "@/content/services";
 
 const description =
-  "Cobrança, citação, bloqueio de conta ou penhora por dívida da empresa: o que verificar, quais documentos reunir e quais caminhos existem em dívida ativa e execução fiscal.";
+  "Cobrança tributária, citação, conta bloqueada ou penhora afetando a empresa? Entenda a origem da dívida, a fase da cobrança e as alternativas que podem ser avaliadas.";
 
 export const metadata: Metadata = {
   title: "Dívida Ativa e Execução Fiscal para Empresas",

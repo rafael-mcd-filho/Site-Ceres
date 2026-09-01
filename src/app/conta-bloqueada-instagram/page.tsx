@@ -4,7 +4,7 @@ import { ServicePage } from "@/components/ServicePage";
 import { instagram } from "@/content/plataformas";
 
 const description =
-  "Perfil desativado ou sem acesso no Instagram: como identificar o tipo de bloqueio, o que registrar e quais caminhos existem.";
+  "Perfil do Instagram desativado, invadido ou sem acesso? Veja o que registrar, como identificar o problema e quais caminhos podem ser avaliados.";
 
 export const metadata: Metadata = {
   title: "Conta do Instagram Desativada",

@@ -2,12 +2,11 @@
 
 import {
   BadgeCheck,
-  Building2,
-  CalendarClock,
-  Compass,
+  BriefcaseBusiness,
+  Clock3,
   FileSearch,
+  Globe2,
   MessageSquare,
-  Scale,
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useRef } from "react";
@@ -20,16 +19,24 @@ type Credential = { icon: LucideIcon; label: string };
  * veda número de casos, depoimento e comparação. Também não repete os nomes das
  * áreas, que já aparecem nos cards logo abaixo.
  */
-const credentials: Credential[] = [
-  { icon: FileSearch, label: "Documentos conferidos um a um" },
-  { icon: CalendarClock, label: "Prazos verificados desde o primeiro contato" },
-  { icon: Compass, label: "Trabalho definido antes de começar" },
-  { icon: Scale, label: "Atuação contenciosa e consultiva" },
-  { icon: Building2, label: "Atendimento a empresas e pessoas físicas" },
-  { icon: MessageSquare, label: "Retorno por WhatsApp ou e-mail" },
+const generalCredentials: Credential[] = [
+  { icon: BriefcaseBusiness, label: "Atendimento realizado pelo escritório" },
+  { icon: FileSearch, label: "Documentos analisados no contexto do caso" },
+  { icon: MessageSquare, label: "Trabalho e próximos passos explicados com clareza" },
+  { icon: Globe2, label: siteConfig.serviceModes },
+  { icon: Clock3, label: siteConfig.responseTime },
 ];
 
-function buildItems(): Credential[] {
+const contestCredentials: Credential[] = [
+  { icon: BriefcaseBusiness, label: "Atendimento realizado pelo escritório" },
+  { icon: FileSearch, label: "Edital, decisão, documentos e prazos analisados em conjunto" },
+  { icon: MessageSquare, label: "Possíveis próximos passos explicados com clareza" },
+  { icon: Globe2, label: siteConfig.serviceModes },
+  { icon: Clock3, label: siteConfig.responseTime },
+];
+
+function buildItems(context: "geral" | "concursos"): Credential[] {
+  const credentials = context === "concursos" ? contestCredentials : generalCredentials;
   if (!siteConfig.oab) return credentials;
   return [...credentials, { icon: BadgeCheck, label: `OAB/PB ${siteConfig.oab}` }];
 }
@@ -48,8 +55,8 @@ function Track({ items, hidden }: { items: Credential[]; hidden?: boolean }) {
   );
 }
 
-export function AuthorityTicker() {
-  const items = buildItems();
+export function AuthorityTicker({ context = "geral" }: { context?: "geral" | "concursos" }) {
+  const items = buildItems(context);
   const ref = useRef<HTMLElement>(null);
 
   // A animação é infinita: fora da viewport ela só gastaria bateria.

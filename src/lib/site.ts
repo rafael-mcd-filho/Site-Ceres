@@ -2,25 +2,23 @@ export const siteConfig = {
   name: "Rabelo e Machado Advocacia",
   shortName: "Rabelo e Machado",
   description:
-    "Escritório de advocacia com atuação em concursos públicos, dívida ativa, execução fiscal e direito empresarial.",
+    "Advocacia para candidatos, empreendedores e empresas em concursos públicos, dívida ativa, direito empresarial, marcas e contas bloqueadas.",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://rabeloemachadoadvocacia.com.br").replace(
     /\/$/,
     "",
   ),
   whatsappNumber: (
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5583991780510"
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "558393013156"
   ).replace(/\D/g, ""),
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "bsrabelo.adv@gmail.com",
-  instagram: "https://www.instagram.com/profa.ceresrabelo/",
+  whatsappDisplay: "(83) 9301-3156",
+  serviceHours: "Segunda a sexta-feira, em horário comercial",
+  responseTime: "Retorno inicial, em média, em 24 horas",
+  serviceModes: "Atendimento online em todo o Brasil e presencial em Princesa Isabel/PB",
   // Requisito obrigatório do Provimento 205/2021 (Anexo). Enquanto o número da
   // sociedade não for validado, a credencial simplesmente não é exibida.
   oab: process.env.NEXT_PUBLIC_OAB_NUMBER || "",
-  /**
-   * Dados do CNPJ 60.663.618/0001-63 (cartão da Receita de 14/08/2026).
-   * `legalName` é a razão social; `name` acima é o nome fantasia registrado
-   * no mesmo cartão ("título do estabelecimento").
-   */
-  legalName: "Ceres Rabelo Sociedade Individual de Advocacia",
+  /** Identidade pública definida para o escritório em todas as páginas. */
+  legalName: "Rabelo e Machado Advocacia",
   cnpj: "60.663.618/0001-63",
   address: {
     street: "Rua Manoel Maia Neto, 25",
@@ -45,5 +43,8 @@ export function whatsappHref(message: string) {
 }
 
 export const defaultWhatsAppMessage =
-  "Olá, conheci o escritório pelo site e gostaria de apresentar minha situação para uma análise inicial.";
+  "Olá, vim pelo site da Rabelo e Machado Advocacia e preciso de orientação sobre uma situação jurídica.";
 
+export function whatsappMessageWithSource(message: string, source: string) {
+  return `${message.trim()}\n\nOrigem no site: ${source}.`;
+}

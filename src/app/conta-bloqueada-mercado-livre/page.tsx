@@ -4,7 +4,7 @@ import { ServicePage } from "@/components/ServicePage";
 import { mercadoLivre } from "@/content/plataformas";
 
 const description =
-  "Conta suspensa ou bloqueada no Mercado Livre: o que o aviso significa, quais registros reunir e quais caminhos podem ser examinados.";
+  "Conta suspensa no Mercado Livre, vendas interrompidas ou valores retidos? Entenda o motivo informado, o impacto na operação e os caminhos que podem ser avaliados.";
 
 export const metadata: Metadata = {
   title: "Conta Bloqueada no Mercado Livre",

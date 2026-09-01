@@ -4,7 +4,7 @@ import { ServicePage } from "@/components/ServicePage";
 import { empresarial } from "@/content/services";
 
 const description =
-  "Entrada e saída de sócio, conflito na sociedade, contrato social e contratos empresariais: atuação em direito societário e empresarial para empresas e sócios.";
+  "A empresa cresceu ou precisa tomar uma decisão importante? Organize contratos, relações entre sócios e mudanças na operação com apoio jurídico.";
 
 export const metadata: Metadata = {
   title: "Advocacia Empresarial",

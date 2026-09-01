@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-08-11T00:00:00-03:00");
+  const lastModified = new Date("2026-09-01T00:00:00-03:00");
 
   return [
     { url: `${siteConfig.url}/`, lastModified },
@@ -18,4 +18,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteConfig.url}/politica-de-privacidade`, lastModified },
   ];
 }
-

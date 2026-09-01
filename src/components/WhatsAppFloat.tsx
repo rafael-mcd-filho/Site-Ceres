@@ -10,37 +10,37 @@ type WhatsAppFloatProps = {
 };
 
 /**
- * Aparece só depois que o hero (que já tem seu próprio CTA de WhatsApp) sai
- * da viewport. Enquanto o hero é visível, o botão fica oculto e não compete
- * visualmente com o CTA principal da primeira dobra.
+ * Aparece depois que o hero sai da viewport e volta a se ocultar quando a
+ * seção de contato entra em cena. Assim o atalho não compete nem com o CTA da
+ * primeira dobra nem com consentimento e envio do formulário.
  *
  * `scroll`/`resize` (passivos) em vez de IntersectionObserver: quando o hero é
  * fixed/animado, alguns browsers atrasam o observer; a checagem direta do
  * `bottom` do rect é imediata e barata.
  */
-export function WhatsAppFloat({ message, label = "Falar pelo WhatsApp" }: WhatsAppFloatProps) {
+export function WhatsAppFloat({ message, label = "Contar minha situação" }: WhatsAppFloatProps) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const hero = document.querySelector<HTMLElement>(".home-hero, .service-hero");
-
-    // Sem hero na página (privacidade, obrigado), o float aparece de imediato.
-    if (!hero) {
-      setReady(true);
-      return;
-    }
+    const contact = document.querySelector<HTMLElement>(".contact-section");
 
     let raf = 0;
     const check = () => {
       raf = 0;
-      setReady(hero.getBoundingClientRect().bottom < 40);
+      const heroGone = !hero || hero.getBoundingClientRect().bottom < 40;
+      const contactRect = contact?.getBoundingClientRect();
+      const contactVisible = Boolean(
+        contactRect && contactRect.top < window.innerHeight - 24 && contactRect.bottom > 88,
+      );
+      setReady(heroGone && !contactVisible);
     };
     const schedule = () => {
       if (raf) return;
       raf = requestAnimationFrame(check);
     };
 
-    check();
+    schedule();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     return () => {

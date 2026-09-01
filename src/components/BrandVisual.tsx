@@ -8,7 +8,7 @@ type BrandVisualProps = {
 export function BrandVisual({ theme = "wine", label = "Escritório · Método · Contexto" }: BrandVisualProps) {
   return (
     <div className={`brand-visual brand-visual--${theme}`} aria-label={label}>
-      <span className="brand-visual__index">RM — 01</span>
+      <span className="brand-visual__index">RM 01</span>
       <div className="brand-visual__paper" aria-hidden="true" />
       <Image
         src="/images/logo-ceres-rabelo.png"

@@ -4,7 +4,7 @@ import { ServicePage } from "@/components/ServicePage";
 import { whatsapp } from "@/content/plataformas";
 
 const description =
-  "Número banido ou suspenso no WhatsApp: diferença entre as restrições, o que guardar como prova e quais caminhos podem ser avaliados.";
+  "Número banido ou suspenso no WhatsApp e atendimento interrompido? Entenda o tipo de bloqueio, o que guardar e quais caminhos podem ser avaliados.";
 
 export const metadata: Metadata = {
   title: "Número Banido no WhatsApp",

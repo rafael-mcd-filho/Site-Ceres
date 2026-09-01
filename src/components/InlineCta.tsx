@@ -1,10 +1,14 @@
 import { CtaButton } from "@/components/CtaButton";
+import { MarkedTitle } from "@/components/MarkedTitle";
 import { whatsappHref } from "@/lib/site";
 
 type InlineCtaProps = {
   eyebrow: string;
   title: string;
+  titleMark?: string;
   text: string;
+  primaryLabel: string;
+  whatsappLabel: string;
   whatsappMessage: string;
   /** Identifica a posição no funil para o GTM. */
   position: string;
@@ -14,13 +18,22 @@ type InlineCtaProps = {
  * Ponto de conversão no meio da página. Sem a barra o visitante rolava
  * 5.000px sem nenhum caminho para o contato.
  */
-export function InlineCta({ eyebrow, title, text, whatsappMessage, position }: InlineCtaProps) {
+export function InlineCta({
+  eyebrow,
+  title,
+  titleMark,
+  text,
+  primaryLabel,
+  whatsappLabel,
+  whatsappMessage,
+  position,
+}: InlineCtaProps) {
   return (
     <aside className="inline-cta">
       <div className="container inline-cta__inner">
         <div className="inline-cta__copy">
           <p className="eyebrow">{eyebrow}</p>
-          <h2>{title}</h2>
+          <h2><MarkedTitle text={title} mark={titleMark} /></h2>
           <p>{text}</p>
         </div>
         <div className="inline-cta__actions">
@@ -30,7 +43,7 @@ export function InlineCta({ eyebrow, title, text, whatsappMessage, position }: I
             data-cta="form-anchor"
             data-cta-position={position}
           >
-            Enviar minha situação
+            {primaryLabel}
           </CtaButton>
           <CtaButton
             href={whatsappHref(whatsappMessage)}
@@ -42,7 +55,7 @@ export function InlineCta({ eyebrow, title, text, whatsappMessage, position }: I
             data-cta="whatsapp"
             data-cta-position={position}
           >
-            Falar pelo WhatsApp
+            {whatsappLabel}
           </CtaButton>
         </div>
       </div>

@@ -21,6 +21,14 @@ const allowedAreas = new Set([
   "Não sei qual área escolher",
 ]);
 
+const platformBySource: Record<string, string> = {
+  "conta-bloqueada-mercado-livre": "Mercado Livre",
+  "conta-bloqueada-instagram": "Instagram",
+  "conta-bloqueada-whatsapp": "WhatsApp",
+};
+
+const allowedPlatforms = new Set(Object.values(platformBySource));
+
 function read(formData: FormData, key: string) {
   return String(formData.get(key) || "").trim();
 }
@@ -33,12 +41,16 @@ export async function submitContact(
   const whatsapp = read(formData, "whatsapp");
   const email = read(formData, "email");
   const area = read(formData, "area");
+  const submittedPlatform = read(formData, "platform");
   const context = read(formData, "context");
   const summary = read(formData, "summary");
   const privacy = read(formData, "privacy");
   const website = read(formData, "website");
   const source = read(formData, "source");
   const startedAt = Number(read(formData, "startedAt"));
+  const platform =
+    platformBySource[source] ||
+    (allowedPlatforms.has(submittedPlatform) ? submittedPlatform : "");
 
   if (website) {
     return { status: "success", message: "Mensagem recebida." };
@@ -102,6 +114,7 @@ export async function submitContact(
     `WhatsApp: ${whatsapp}`,
     `E-mail: ${email || "não informado"}`,
     `Área: ${area}`,
+    `Plataforma: ${platform || "não aplicável"}`,
     `Contexto: ${context || "não informado"}`,
     `Origem: ${source || "site"}`,
     "",
@@ -119,7 +132,7 @@ export async function submitContact(
       body: JSON.stringify({
         from,
         to: [to],
-        subject: `[Site Rabelo e Machado] Novo contato — ${area}`,
+        subject: `[Site Rabelo e Machado] Novo contato — ${platform || area}`,
         text: lines.join("\n"),
         reply_to: email || undefined,
       }),
@@ -139,6 +152,8 @@ export async function submitContact(
 
   // Fora do try: `redirect` sinaliza por exceção e seria engolido pelo catch.
   // A URL própria é o que permite marcar a conversão no GTM e no Ads.
-  redirect(`/obrigado?area=${encodeURIComponent(area)}`);
+  const confirmationParams = new URLSearchParams({ area });
+  if (platform) confirmationParams.set("plataforma", platform);
+  redirect(`/obrigado?${confirmationParams.toString()}`);
 }
 

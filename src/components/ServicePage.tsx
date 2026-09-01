@@ -10,6 +10,7 @@ import { ServiceSituations } from "@/components/service/ServiceSituations";
 import { ServiceStart } from "@/components/service/ServiceStart";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import type { ServiceConfig } from "@/content/services";
+import { whatsappMessageWithSource } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/structured-data";
 
 /**
@@ -24,6 +25,12 @@ import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/structured
  * reaproveitar, substituindo só a que for diferente. Ver AGENTS.md do projeto.
  */
 export function ServicePage({ config }: { config: ServiceConfig }) {
+  const messageAt = (position: string) =>
+    whatsappMessageWithSource(
+      config.whatsappMessage,
+      `página de ${config.serviceName}, ${position}`,
+    );
+
   return (
     <ServicePageShell slug={config.slug} theme={config.theme}>
       <ServiceHero
@@ -33,16 +40,18 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
         titleMark={config.titleMark}
         lead={config.lead}
         primaryCta={config.primaryCta}
+        whatsappCta={config.whatsappCta}
         heroNote={config.heroNote}
         heroTags={config.heroTags}
-        whatsappMessage={config.whatsappMessage}
+        whatsappMessage={messageAt("botão do início")}
       />
 
-      <AuthorityTicker />
+      <AuthorityTicker context={config.slug === "concursos" ? "concursos" : "geral"} />
 
       <ServiceSituations
         slug={config.slug}
         title={config.situationsTitle}
+        titleMark={config.sectionMarks.situations}
         lead={config.situationsLead}
         items={config.situations}
       />
@@ -51,6 +60,7 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
         slug={config.slug}
         mechanismEyebrow={config.mechanismEyebrow}
         mechanismTitle={config.mechanismTitle}
+        mechanismTitleMark={config.sectionMarks.mechanism}
         mechanismText={config.mechanismText}
         mechanismNote={config.mechanismNote}
         mechanismItems={config.mechanismItems}
@@ -62,6 +72,7 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
       <ServicePaths
         slug={config.slug}
         title={config.pathsTitle}
+        titleMark={config.sectionMarks.paths}
         lead={config.pathsLead}
         items={config.paths}
       />
@@ -69,8 +80,11 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
       <InlineCta
         eyebrow="PRÓXIMO PASSO"
         title={config.inlineCtaTitle}
+        titleMark={config.sectionMarks.inlineCta}
         text={config.inlineCtaText}
-        whatsappMessage={config.whatsappMessage}
+        primaryLabel={config.inlineCtaLabel}
+        whatsappLabel={config.whatsappCta}
+        whatsappMessage={messageAt("chamada no meio da página")}
         position="meio"
       />
 
@@ -79,18 +93,24 @@ export function ServicePage({ config }: { config: ServiceConfig }) {
       <ServiceStart
         slug={config.slug}
         contactTitle={config.contactTitle}
+        contactTitleMark={config.sectionMarks.contact}
         contactLead={config.contactLead}
         processTitle={config.processTitle}
         process={config.process}
         formArea={config.formArea}
+        formPlatform={config.formPlatform}
         documentsTitle={config.documentsTitle}
         documents={config.documents}
         documentsLead={config.documentsLead}
         trustNote={config.trustNote}
-        whatsappMessage={config.whatsappMessage}
+        whatsappMessage={messageAt("seção final de contato")}
+        finalCta={config.finalCta}
       />
 
-      <WhatsAppFloat message={config.whatsappMessage} />
+      <WhatsAppFloat
+        message={messageAt("botão flutuante durante a leitura")}
+        label={config.whatsappCta}
+      />
       <JsonLd
         data={[
           faqPageSchema(config.faq),

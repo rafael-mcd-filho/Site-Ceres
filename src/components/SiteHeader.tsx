@@ -9,17 +9,19 @@ import {
   ChevronDown,
   FileSearch,
   Home,
-  Camera,
   Menu,
-  MessageSquare,
   Scale,
-  ShoppingBag,
   X,
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { CtaButton } from "@/components/CtaButton";
-import { defaultWhatsAppMessage, siteConfig, whatsappHref } from "@/lib/site";
+import {
+  defaultWhatsAppMessage,
+  siteConfig,
+  whatsappHref,
+  whatsappMessageWithSource,
+} from "@/lib/site";
 
 const navItems: Array<{ href: string; label: string; icon: LucideIcon }> = [
   { href: "/", label: "Início", icon: Home },
@@ -30,27 +32,48 @@ const navItems: Array<{ href: string; label: string; icon: LucideIcon }> = [
 ];
 
 /** Três páginas irmãs: viram um submenu para a barra não estourar. */
-const plataformaItems: Array<{ href: string; label: string; icon: LucideIcon }> = [
-  { href: "/conta-bloqueada-mercado-livre", label: "Mercado Livre", icon: ShoppingBag },
-  { href: "/conta-bloqueada-instagram", label: "Instagram", icon: Camera },
-  { href: "/conta-bloqueada-whatsapp", label: "WhatsApp", icon: MessageSquare },
+const plataformaItems = [
+  { href: "/conta-bloqueada-mercado-livre", label: "Mercado Livre", platform: "mercado-livre", logoSrc: "/images/ceres/platform-mercado-livre.svg", navWidth: 32, navHeight: 27, mobileWidth: 32, mobileHeight: 27 },
+  { href: "/conta-bloqueada-instagram", label: "Instagram", platform: "instagram", logoSrc: "/images/ceres/platform-instagram.svg", navWidth: 23, navHeight: 23, mobileWidth: 24, mobileHeight: 24 },
+  { href: "/conta-bloqueada-whatsapp", label: "WhatsApp", platform: "whatsapp", logoSrc: "/images/ceres/platform-whatsapp.svg", navWidth: 27, navHeight: 27, mobileWidth: 28, mobileHeight: 28 },
 ];
+
+const pageLabels: Record<string, string> = {
+  "/": "página inicial",
+  "/concursos": "página de concursos públicos",
+  "/divida-ativa-empresas": "página de dívida ativa e execução fiscal",
+  "/direito-empresarial": "página de direito empresarial",
+  "/registro-de-marca": "página de registro de marca",
+  "/conta-bloqueada-mercado-livre": "página de conta bloqueada no Mercado Livre",
+  "/conta-bloqueada-instagram": "página de conta bloqueada no Instagram",
+  "/conta-bloqueada-whatsapp": "página de número bloqueado no WhatsApp",
+  "/politica-de-privacidade": "política de privacidade",
+};
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const [groupOpen, setGroupOpen] = useState(false);
-  const [lastPathname, setLastPathname] = useState(pathname);
   const groupRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const emPlataforma = plataformaItems.some((item) => item.href === pathname);
+  const currentPageLabel = pageLabels[pathname] || `página ${pathname}`;
+  const headerWhatsAppMessage = whatsappMessageWithSource(
+    defaultWhatsAppMessage,
+    `${currentPageLabel}, cabeçalho`,
+  );
 
-  // Fecha os menus ao navegar — inclusive por voltar/avançar do navegador.
-  if (pathname !== lastPathname) {
-    setLastPathname(pathname);
-    setOpen(false);
-    setGroupOpen(false);
-  }
+  // Links fecham o menu diretamente; voltar/avançar é um evento externo.
+  useEffect(() => {
+    const closeMenus = () => {
+      setOpen(false);
+      setGroupOpen(false);
+    };
+    window.addEventListener("popstate", closeMenus);
+    return () => window.removeEventListener("popstate", closeMenus);
+  }, []);
 
   // Submenu fecha ao clicar fora ou no Escape.
   useEffect(() => {
@@ -81,17 +104,52 @@ export function SiteHeader() {
   useEffect(() => {
     if (!open) return;
 
+    const menu = menuRef.current;
+    const content = document.getElementById("conteudo");
+    const footer = document.querySelector<HTMLElement>(".site-footer");
     const previous = document.body.style.overflow;
+    const toggle = toggleRef.current;
+    const previousContentInert = content?.inert;
+    const previousFooterInert = footer?.inert;
     document.body.style.overflow = "hidden";
+    if (content) content.inert = true;
+    if (footer) footer.inert = true;
+
+    const focusFrame = requestAnimationFrame(() => {
+      menu?.querySelector<HTMLElement>("a[href], button:not([disabled])")?.focus();
+    });
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab" || !menu) return;
+      const focusable = Array.from(
+        menu.querySelectorAll<HTMLElement>("a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])"),
+      ).filter((element) => !element.hasAttribute("hidden"));
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
+      cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previous;
+      if (content) content.inert = previousContentInert ?? false;
+      if (footer) footer.inert = previousFooterInert ?? false;
       document.removeEventListener("keydown", onKeyDown);
+      toggle?.focus();
     };
   }, [open]);
 
@@ -101,13 +159,13 @@ export function SiteHeader() {
         className={`site-header ${scrolled ? "is-scrolled" : ""} ${open ? "is-menu-open" : ""}`}
       >
         <div className="site-header__inner container">
-        <Link href="/" className="brand" aria-label="Rabelo e Machado Advocacia — início">
+        <Link href="/" className="brand" aria-label="Rabelo e Machado Advocacia, início">
           <Image
             src="/images/logo-ceres-rabelo.png"
             alt=""
             width={38}
             height={62}
-            priority
+            preload
             className="brand__mark"
           />
           <span className="brand__text">
@@ -146,14 +204,16 @@ export function SiteHeader() {
               hidden={!groupOpen}
             >
               {plataformaItems.map((item) => {
-                const Icon = item.icon;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     aria-current={pathname === item.href ? "page" : undefined}
+                    onClick={() => setGroupOpen(false)}
                   >
-                    <Icon size={16} aria-hidden="true" />
+                    <span className="platform-logo-frame" aria-hidden="true">
+                      <Image className={`platform-logo platform-logo--nav platform-logo--${item.platform}`} src={item.logoSrc} alt="" width={item.navWidth} height={item.navHeight} />
+                    </span>
                     {item.label}
                   </Link>
                 );
@@ -163,16 +223,17 @@ export function SiteHeader() {
         </nav>
 
         <CtaButton
-          href={whatsappHref(defaultWhatsAppMessage)}
+          href={whatsappHref(headerWhatsAppMessage)}
           seal="whatsapp"
           external
           className="button--small header-cta"
           data-event="whatsapp_click"
         >
-          Falar sobre o caso
+          Contar meu caso
         </CtaButton>
 
         <button
+          ref={toggleRef}
           className="menu-toggle"
           type="button"
           aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -188,6 +249,7 @@ export function SiteHeader() {
       {/* Fora do <header>: o `backdrop-filter` dele criaria bloco contentor
           para o `position: fixed` e prenderia o overlay à altura do header. */}
       <div
+        ref={menuRef}
         id="mobile-menu"
         className={`mobile-menu ${open ? "is-open" : ""}`}
         aria-hidden={!open}
@@ -200,6 +262,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={pathname === item.href ? "page" : undefined}
+                onClick={() => setOpen(false)}
               >
                 <Icon size={20} aria-hidden="true" />
                 <span>{item.label}</span>
@@ -209,14 +272,16 @@ export function SiteHeader() {
 
           <p className="mobile-menu__group">Contas bloqueadas</p>
           {plataformaItems.map((item) => {
-            const Icon = item.icon;
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={pathname === item.href ? "page" : undefined}
+                onClick={() => setOpen(false)}
               >
-                <Icon size={20} aria-hidden="true" />
+                <span className="platform-logo-frame" aria-hidden="true">
+                  <Image className={`platform-logo platform-logo--mobile platform-logo--${item.platform}`} src={item.logoSrc} alt="" width={item.mobileWidth} height={item.mobileHeight} />
+                </span>
                 <span>{item.label}</span>
               </Link>
             );
@@ -225,12 +290,17 @@ export function SiteHeader() {
 
         <div className="mobile-menu__foot container">
           <CtaButton
-            href={whatsappHref(defaultWhatsAppMessage)}
+            href={whatsappHref(
+              whatsappMessageWithSource(
+                defaultWhatsAppMessage,
+                `${currentPageLabel}, menu mobile`,
+              ),
+            )}
             seal="whatsapp"
             external
             data-event="whatsapp_click"
           >
-            Falar pelo WhatsApp
+            Contar minha situação
           </CtaButton>
           <p>
             Escritório de advocacia

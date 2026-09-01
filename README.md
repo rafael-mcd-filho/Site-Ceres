@@ -1,8 +1,8 @@
-# Site Ceres Rabelo Advocacia
+# Site Rabelo e Machado Advocacia
 
-Novo site institucional e comercial de Ceres Rabelo Advocacia.
+Site institucional e comercial do escritório Rabelo e Machado Advocacia.
 
-**Fase atual:** primeira versão funcional implementada em Next.js. As cinco páginas, componentes globais, formulário, WhatsApp e base de SEO estão prontas para validação visual e de conteúdo.
+**Fase atual:** páginas, componentes globais, WhatsApp contextual, formulário e base de SEO implementados. Restam as configurações de publicação listadas ao final deste documento.
 
 ## Executar localmente
 
@@ -24,7 +24,7 @@ pnpm start
 
 Copie `.env.example` para `.env.local` e preencha as variáveis necessárias. Sem as credenciais do Resend, o formulário continua validando os dados, mas não envia e-mails.
 
-Os links de WhatsApp e e-mail usam provisoriamente os dados públicos do site atual e podem ser substituídos pelas variáveis de ambiente.
+Os links de WhatsApp usam o número oficial definido no projeto e incluem a página e a posição do clique na mensagem inicial. O site não divulga e-mail público. O destinatário do formulário permanece sem configuração até a definição da caixa de entrada do escritório.
 
 ## Estrutura
 
@@ -45,6 +45,10 @@ docs/             # briefing, estratégia, especificação e referências
 - `/concursos` — Concursos públicos;
 - `/divida-ativa-empresas` — Dívida ativa para empresas;
 - `/direito-empresarial` — Direito empresarial;
+- `/registro-de-marca` — Registro de marca;
+- `/conta-bloqueada-mercado-livre` — Conta bloqueada no Mercado Livre;
+- `/conta-bloqueada-instagram` — Conta desativada no Instagram;
+- `/conta-bloqueada-whatsapp` — Número banido no WhatsApp;
 - `/politica-de-privacidade` — Política de privacidade.
 
 ## Stack
@@ -63,10 +67,8 @@ O plano completo de copy, direção visual, animações, SEO e implementação e
 
 ## Pendências antes da publicação
 
-- preencher `NEXT_PUBLIC_OAB_NUMBER` — sem ele a credencial da OAB não é exibida na barra de autoridade nem no schema, e o requisito do Provimento 205/2021 fica descoberto;
-- substituir ou aprovar os dados provisórios de contato;
-- receber os arquivos originais da logo e das fotografias;
-- configurar o domínio e as variáveis de ambiente na Vercel;
-- configurar o Resend e testar a entrega do formulário;
-- validar copy, retratos profissionais e informações institucionais com a cliente;
+- preencher `NEXT_PUBLIC_OAB_NUMBER` com o registro da sociedade na OAB — não será exibida inscrição individual;
+- configurar o domínio `rabeloemachadoadvocacia.com.br` e as variáveis de ambiente na hospedagem;
+- definir `CONTACT_TO_EMAIL` e `CONTACT_FROM_EMAIL`, configurar o Resend e testar a entrega do formulário;
+- conferir o funcionamento do WhatsApp `(83) 9301-3156` no ambiente publicado;
 - incluir analytics somente após definição do consentimento e da ferramenta.

@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Rabelo e Machado Advocacia",
     short_name: "Rabelo e Machado",
     description:
-      "Escritório de advocacia com atuação em concursos públicos, dívida ativa, execução fiscal e direito empresarial.",
+      "Escritório de advocacia com atendimento em concursos públicos, dívida ativa, execução fiscal, direito empresarial, registro de marca e contas bloqueadas.",
     start_url: "/",
     display: "standalone",
     background_color: "#fbf7ef",

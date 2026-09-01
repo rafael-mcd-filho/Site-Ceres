@@ -120,9 +120,8 @@ const structuredData = {
       legalName: siteConfig.legalName,
       taxID: siteConfig.cnpj,
       url: siteConfig.url,
-      email: siteConfig.email,
+      telephone: `+${siteConfig.whatsappNumber}`,
       description: siteConfig.description,
-      sameAs: [siteConfig.instagram],
       address: {
         "@type": "PostalAddress",
         streetAddress: siteConfig.address.street,
@@ -132,6 +131,18 @@ const structuredData = {
         addressCountry: siteConfig.address.country,
       },
       areaServed: { "@type": "Country", name: "Brasil" },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "atendimento jurídico",
+        telephone: `+${siteConfig.whatsappNumber}`,
+        availableLanguage: "Portuguese",
+        areaServed: "BR",
+      },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        description: siteConfig.serviceHours,
+      },
       knowsAbout: [
         "Concursos públicos",
         "Direito administrativo",
@@ -174,7 +185,7 @@ const structuredData = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${literata.variable} ${dmSans.variable}`}>
+    <html lang="pt-BR" data-scroll-behavior="smooth" className={`${literata.variable} ${dmSans.variable}`}>
       <body>
         <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
         <SiteHeader />

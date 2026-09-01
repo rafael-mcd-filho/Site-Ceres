@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, CalendarClock, CheckCircle2, FileText, MessageSquare } from "lucide-react";
+import { ArrowLeft, CalendarClock, FileText, MessageSquare } from "lucide-react";
 import { ConversionTracker } from "@/app/obrigado/ConversionTracker";
 import { CtaButton } from "@/components/CtaButton";
-import { defaultWhatsAppMessage, whatsappHref } from "@/lib/site";
+import { MarkedTitle } from "@/components/MarkedTitle";
+import {
+  defaultWhatsAppMessage,
+  whatsappHref,
+  whatsappMessageWithSource,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Mensagem recebida",
@@ -15,61 +21,78 @@ export const metadata: Metadata = {
 const steps = [
   {
     icon: FileText,
-    title: "Leitura do que você enviou",
-    text: "O resumo é lido junto com a área indicada, para situar do que se trata antes de qualquer resposta.",
+    title: "Entender o que você enviou",
+    text: "O escritório confere o seu resumo e a área indicada para identificar o assunto e o que pode faltar para compreender a situação.",
   },
   {
     icon: MessageSquare,
     title: "Retorno pelo WhatsApp",
-    text: "O contato acontece pelo número informado. Se faltar algum dado para entender o caso, ele é pedido nesse momento.",
+    text: "O contato acontece pelo número informado, em média, em 24 horas. Se faltar algum dado para entender o caso, ele é pedido nesse momento.",
   },
   {
     icon: CalendarClock,
-    title: "Delimitação dos próximos passos",
-    text: "Você fica sabendo em que ponto o caso está, quais prazos correm e o que é possível fazer a partir daí.",
+    title: "Orientação sobre o próximo passo",
+    text: "O retorno indica quais informações ou documentos são necessários e como a análise pode continuar.",
   },
 ];
 
 export default async function ObrigadoPage({
   searchParams,
 }: {
-  searchParams: Promise<{ area?: string }>;
+  searchParams: Promise<{ area?: string; plataforma?: string }>;
 }) {
-  const { area } = await searchParams;
+  const { area, plataforma } = await searchParams;
+  const conversionContext = plataforma || area || "não informada";
+  const followUpMessage = whatsappMessageWithSource(
+    defaultWhatsAppMessage,
+    `página de confirmação após formulário sobre ${conversionContext}`,
+  );
 
   return (
-    <main className="thanks-page home-page">
-      <ConversionTracker area={area || "não informada"} />
+    <main id="topo" className="thanks-page home-page">
+      <ConversionTracker area={conversionContext} />
 
       <section className="thanks-hero">
         <div className="container thanks-hero__inner">
-          <CheckCircle2 size={40} aria-hidden="true" />
-          <p className="eyebrow">MENSAGEM RECEBIDA</p>
-          <h1>Recebemos as informações. O retorno vem pelo WhatsApp.</h1>
-          <p className="thanks-lead">
-            {area
-              ? `Sua mensagem foi registrada na área de ${area.toLowerCase()}.`
-              : "Sua mensagem foi registrada."}{" "}
-            Não é necessário reenviar o formulário.
-          </p>
+          <div className="thanks-hero__copy">
+            <p className="eyebrow">MENSAGEM RECEBIDA</p>
+            <h1>
+              <MarkedTitle
+                text="Sua mensagem chegou. O retorno será feito pelo WhatsApp."
+                mark="retorno será feito pelo WhatsApp"
+              />
+            </h1>
+            <p className="thanks-lead">
+              {plataforma
+                ? `Sua mensagem sobre ${plataforma} foi registrada.`
+                : area
+                  ? `Sua mensagem foi registrada na área de ${area.toLowerCase()}.`
+                : "Sua mensagem foi registrada."}{" "}
+              Não é necessário reenviar o formulário.
+            </p>
 
-          <div className="thanks-actions">
-            <CtaButton
-              href={whatsappHref(defaultWhatsAppMessage)}
-              seal="whatsapp"
-              external
-              id="cta-whatsapp-obrigado"
-              data-event="whatsapp_click"
-              data-cta="whatsapp"
-              data-cta-position="obrigado"
-            >
-              Adiantar pelo WhatsApp
-            </CtaButton>
-            <Link className="thanks-back" href="/">
-              <ArrowLeft size={16} aria-hidden="true" />
-              Voltar para o início
-            </Link>
+            <div className="thanks-actions">
+              <CtaButton
+                href={whatsappHref(followUpMessage)}
+                seal="whatsapp"
+                external
+                id="cta-whatsapp-obrigado"
+                data-event="whatsapp_click"
+                data-cta="whatsapp"
+                data-cta-position="obrigado"
+              >
+                Complementar pelo WhatsApp
+              </CtaButton>
+              <Link className="thanks-back" href="/">
+                <ArrowLeft size={16} aria-hidden="true" />
+                Voltar para o início
+              </Link>
+            </div>
           </div>
+
+          <figure className="thanks-hero__visual" aria-hidden="true">
+            <Image src="/images/ceres/confirmation.webp" alt="" fill sizes="(max-width: 760px) 240px, 330px" />
+          </figure>
         </div>
       </section>
 
@@ -77,7 +100,12 @@ export default async function ObrigadoPage({
         <div className="container">
           <div className="section-heading">
             <p className="eyebrow">O QUE ACONTECE AGORA</p>
-            <h2>Três etapas até uma resposta com contexto.</h2>
+            <h2>
+              <MarkedTitle
+                text="O que acontece depois que a mensagem é enviada?"
+                mark="depois que a mensagem é enviada"
+              />
+            </h2>
           </div>
 
           <div className="thanks-steps">
@@ -95,7 +123,8 @@ export default async function ObrigadoPage({
 
           <p className="thanks-note">
             Enquanto isso, evite enviar documentos ou dados sensíveis por canais abertos.
-            O canal adequado é indicado no retorno.
+            O canal adequado é indicado no retorno. Se houver prazo em curso, informe isso
+            pelo WhatsApp. O envio da mensagem não suspende prazos nem formaliza a contratação.
           </p>
         </div>
       </section>

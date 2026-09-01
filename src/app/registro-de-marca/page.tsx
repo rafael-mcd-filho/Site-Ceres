@@ -4,7 +4,7 @@ import { ServicePage } from "@/components/ServicePage";
 import { registroDeMarca } from "@/content/marca";
 
 const description =
-  "Usa um nome e quer protegê-lo? Pesquisa de marcas anteriores, escolha da classe, pedido de registro no INPI e acompanhamento de exigências e oposições até a decisão.";
+  "Quer proteger o nome que sua empresa está construindo? Pesquisa de marcas parecidas, pedido no INPI e acompanhamento do registro até a decisão.";
 
 export const metadata: Metadata = {
   title: "Registro de Marca no INPI",

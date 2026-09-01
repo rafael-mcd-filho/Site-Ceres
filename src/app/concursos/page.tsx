@@ -4,7 +4,7 @@ import { ServicePage } from "@/components/ServicePage";
 import { concursos } from "@/content/services";
 
 const description =
-  "Informações sobre edital, eliminação, TAF, avaliação médica, cotas, nomeação, recursos e medidas relacionadas a concursos públicos.";
+  "Uma eliminação, nota, TAF ou decisão da banca colocou sua aprovação em risco? Entenda o que precisa ser analisado e quais caminhos podem ser avaliados.";
 
 export const metadata: Metadata = {
   title: "Advocacia em Concursos Públicos",

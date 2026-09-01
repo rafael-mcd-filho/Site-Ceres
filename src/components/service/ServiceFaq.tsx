@@ -1,4 +1,5 @@
 import { FaqList, type FaqItem } from "@/components/FaqList";
+import { MarkedTitle } from "@/components/MarkedTitle";
 import { Reveal } from "@/components/Reveal";
 
 export function ServiceFaq({ items }: { items: FaqItem[] }) {
@@ -8,8 +9,13 @@ export function ServiceFaq({ items }: { items: FaqItem[] }) {
         <Reveal>
           <div className="faq-intro">
             <p className="eyebrow">PERGUNTAS FREQUENTES</p>
-            <h2>As dúvidas que aparecem logo no primeiro contato.</h2>
-            <p>Uma data, um documento ou uma cláusula específica mudam a leitura inteira. Estas respostas são gerais e não substituem a análise individual do seu caso.</p>
+            <h2>
+              <MarkedTitle
+                text="Dúvidas que costumam surgir antes de buscar ajuda."
+                mark="antes de buscar ajuda"
+              />
+            </h2>
+            <p>Veja respostas para as dúvidas mais comuns antes do primeiro contato. Se os fatos, documentos ou datas do seu caso forem diferentes, conte isso na mensagem.</p>
           </div>
         </Reveal>
         <Reveal delay={80}><FaqList items={items} /></Reveal>

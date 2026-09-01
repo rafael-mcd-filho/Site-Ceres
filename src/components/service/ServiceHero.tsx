@@ -10,6 +10,7 @@ type ServiceHeroProps = {
   titleMark: string;
   lead: string;
   primaryCta: string;
+  whatsappCta: string;
   heroNote: string;
   heroTags: string[];
   whatsappMessage: string;
@@ -22,6 +23,7 @@ export function ServiceHero({
   titleMark,
   lead,
   primaryCta,
+  whatsappCta,
   heroNote,
   heroTags,
   whatsappMessage,
@@ -57,7 +59,7 @@ export function ServiceHero({
               data-cta="whatsapp"
               data-cta-position="hero"
             >
-              Falar pelo WhatsApp
+              {whatsappCta}
             </CtaButton>
           </div>
           <p className="hero-note"><span aria-hidden="true" />{heroNote}</p>

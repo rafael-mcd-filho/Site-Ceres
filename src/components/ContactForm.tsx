@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
-import type { ServiceArea } from "@/content/services";
+import type { ContactPlatform, ServiceArea } from "@/content/services";
 import {
   submitContact,
   type ContactFormState,
@@ -11,6 +11,7 @@ import {
 
 type ContactFormProps = {
   area?: ServiceArea;
+  platform?: ContactPlatform;
   source: string;
 };
 
@@ -20,8 +21,32 @@ const contextualLabels = {
   "Concursos públicos": "Qual concurso, cargo, banca e etapa?",
   "Dívida ativa e execução fiscal": "Qual cobrança ou documento você recebeu?",
   "Direito empresarial": "O que a empresa faz e o que está acontecendo?",
-  "Conta bloqueada em plataforma": "Qual plataforma e quando a conta foi bloqueada?",
+  "Conta bloqueada em plataforma": "Qual conta foi afetada e quando ocorreu o bloqueio?",
   "Registro de marca": "Qual nome pretendido e qual ramo de atividade?",
+};
+
+const platformContexts: Record<
+  ContactPlatform,
+  { label: string; contextPlaceholder: string; summaryPlaceholder: string }
+> = {
+  "Mercado Livre": {
+    label: "Qual é a conta afetada e quando a suspensão aconteceu?",
+    contextPlaceholder: "Loja ou ID · data da suspensão",
+    summaryPlaceholder:
+      "Descreva o aviso recebido, as tentativas de recurso e o impacto em anúncios ou repasses.",
+  },
+  Instagram: {
+    label: "Qual é o @ do perfil e quando ele saiu do ar?",
+    contextPlaceholder: "@perfil · data da desativação",
+    summaryPlaceholder:
+      "Descreva o aviso exibido, as tentativas de recurso e como o perfil era utilizado.",
+  },
+  WhatsApp: {
+    label: "Qual número foi banido e quando o bloqueio aconteceu?",
+    contextPlaceholder: "Número afetado · data do banimento",
+    summaryPlaceholder:
+      "Descreva a mensagem exibida, as tentativas de revisão e como o número era utilizado.",
+  },
 };
 
 function track(event: string, details: Record<string, string>) {
@@ -50,18 +75,29 @@ function SubmitButton() {
       id="cta-form-submit"
       data-cta="form-submit"
     >
-      <span className="button__label">{pending ? "Enviando…" : "Enviar informações"}</span>
+      <span className="button__label">{pending ? "Enviando…" : "Enviar para análise inicial"}</span>
     </button>
   );
 }
 
-export function ContactForm({ area, source }: ContactFormProps) {
+export function ContactForm({ area, platform, source }: ContactFormProps) {
   const [state, action] = useActionState(submitContact, initialState);
   const [startedAt] = useState(() => Date.now().toString());
   const [phone, setPhone] = useState("");
   const [lastStatus, setLastStatus] = useState(state.status);
   const started = useRef(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const contextLabel = platform
+    ? platformContexts[platform].label
+    : area
+      ? contextualLabels[area]
+      : "";
+  const contextPlaceholder = platform
+    ? platformContexts[platform].contextPlaceholder
+    : "Informe apenas o essencial por enquanto";
+  const summaryPlaceholder = platform
+    ? platformContexts[platform].summaryPlaceholder
+    : "Conte o que aconteceu, o que mais preocupa você e as datas principais.";
 
   // `form.reset()` não limpa campo controlado — o telefone precisa disso à parte.
   if (state.status !== lastStatus) {
@@ -70,22 +106,38 @@ export function ContactForm({ area, source }: ContactFormProps) {
   }
 
   useEffect(() => {
-    track("form_view", { page: source, area: area || "não definida" });
-  }, [area, source]);
+    track("form_view", {
+      page: source,
+      area: area || "não definida",
+      platform: platform || "não aplicável",
+    });
+  }, [area, platform, source]);
 
   useEffect(() => {
     if (state.status === "success") {
-      track("form_success", { page: source, area: area || "selecionada" });
+      track("form_success", {
+        page: source,
+        area: area || "selecionada",
+        platform: platform || "não aplicável",
+      });
       formRef.current?.reset();
     } else if (state.status === "error" || state.status === "configuration") {
-      track("form_error", { page: source, area: area || "selecionada" });
+      track("form_error", {
+        page: source,
+        area: area || "selecionada",
+        platform: platform || "não aplicável",
+      });
     }
-  }, [area, source, state.status]);
+  }, [area, platform, source, state.status]);
 
   const markStarted = () => {
     if (started.current) return;
     started.current = true;
-    track("form_start", { page: source, area: area || "não definida" });
+    track("form_start", {
+      page: source,
+      area: area || "não definida",
+      platform: platform || "não aplicável",
+    });
   };
 
   return (
@@ -94,10 +146,18 @@ export function ContactForm({ area, source }: ContactFormProps) {
       action={action}
       className="contact-form"
       onChange={markStarted}
-      onSubmit={() => track("form_submit", { page: source, area: area || "selecionada" })}
+      onSubmit={() =>
+        track("form_submit", {
+          page: source,
+          area: area || "selecionada",
+          platform: platform || "não aplicável",
+        })
+      }
     >
       <input type="hidden" name="source" value={source} />
       <input type="hidden" name="startedAt" value={startedAt} />
+      {area && <input type="hidden" name="area" value={area} />}
+      {platform && <input type="hidden" name="platform" value={platform} />}
       <div className="honeypot" aria-hidden="true">
         <label htmlFor={`website-${source}`}>Website</label>
         <input id={`website-${source}`} name="website" tabIndex={-1} autoComplete="off" />
@@ -134,13 +194,19 @@ export function ContactForm({ area, source }: ContactFormProps) {
           {state.errors?.email && <small className="field-error">{state.errors.email}</small>}
         </div>
 
-        <div className="field">
-          <label htmlFor={`area-${source}`}>Área <span>*</span></label>
-          {area ? (
-            <>
-              <input id={`area-${source}`} name="area" value={area} readOnly />
-            </>
-          ) : (
+        {area ? (
+          <div className="field">
+            <label htmlFor={`context-${source}`}>{contextLabel}</label>
+            <input
+              id={`context-${source}`}
+              name="context"
+              maxLength={240}
+              placeholder={contextPlaceholder}
+            />
+          </div>
+        ) : (
+          <div className="field">
+            <label htmlFor={`area-${source}`}>Área <span>*</span></label>
             <select id={`area-${source}`} name="area" defaultValue="" required>
               <option value="" disabled>Selecione</option>
               <option>Concursos públicos</option>
@@ -150,34 +216,26 @@ export function ContactForm({ area, source }: ContactFormProps) {
               <option>Registro de marca</option>
               <option>Não sei qual área escolher</option>
             </select>
-          )}
-          {state.errors?.area && <small className="field-error">{state.errors.area}</small>}
-        </div>
+            {state.errors?.area && <small className="field-error">{state.errors.area}</small>}
+          </div>
+        )}
       </div>
 
-      {area && (
-        <div className="field">
-          <label htmlFor={`context-${source}`}>{contextualLabels[area]}</label>
-          <input
-            id={`context-${source}`}
-            name="context"
-            maxLength={240}
-            placeholder="Só o essencial por enquanto"
-          />
-        </div>
-      )}
-
       <div className="field">
-        <label htmlFor={`summary-${source}`}>Resumo da situação <span>*</span></label>
+        <label htmlFor={`summary-${source}`}>Conte o que aconteceu <span>*</span></label>
         <textarea
           id={`summary-${source}`}
           name="summary"
           rows={5}
           minLength={20}
           maxLength={1600}
-          placeholder="Conte o que aconteceu, as datas importantes e o que precisa compreender. Não envie documentos ou dados excessivamente sensíveis neste campo."
+          placeholder={summaryPlaceholder}
+          aria-describedby={`summary-hint-${source}`}
           required
         />
+        <small className="field-hint" id={`summary-hint-${source}`}>
+          Não envie documentos, senhas ou dados excessivamente sensíveis neste campo.
+        </small>
         {state.errors?.summary && <small className="field-error">{state.errors.summary}</small>}
       </div>
 
@@ -188,6 +246,10 @@ export function ContactForm({ area, source }: ContactFormProps) {
         </label>
       </div>
       {state.errors?.privacy && <small className="field-error">{state.errors.privacy}</small>}
+
+      <small className="field-hint">
+        O envio deste formulário não suspende prazos nem formaliza a contratação do escritório.
+      </small>
 
       <SubmitButton />
 

@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Mail, ShieldCheck, TriangleAlert } from "lucide-react";
-import { siteConfig } from "@/lib/site";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
+import { MarkedTitle } from "@/components/MarkedTitle";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import {
+  siteConfig,
+  whatsappHref,
+  whatsappMessageWithSource,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade",
@@ -11,14 +17,17 @@ export const metadata: Metadata = {
 };
 
 /** Alterar sempre que o conteúdo mudar — a data é exibida ao titular. */
-const ultimaRevisao = "12 de agosto de 2026";
+const ultimaRevisao = "1º de setembro de 2026";
+
+const privacyWhatsAppMessage = whatsappMessageWithSource(
+  "Olá, vim pelo site da Rabelo e Machado Advocacia e gostaria de fazer uma solicitação relacionada aos meus dados pessoais.",
+  "Política de privacidade, canal do titular",
+);
 
 type Secao = {
   id: string;
   title: string;
   paragraphs?: string[];
-  /** Itens que dependem de validação antes da publicação. */
-  pending?: string[];
   list?: { term: string; text: string }[];
   table?: { head: string[]; rows: string[][] };
 };
@@ -28,12 +37,8 @@ const sections: Secao[] = [
     id: "controlador",
     title: "1. Quem é o controlador dos dados",
     paragraphs: [
-      "O controlador é a pessoa ou entidade que decide como e por que os dados pessoais são tratados. Para os dados coletados neste site, o controlador é Ceres Rabelo Sociedade Individual de Advocacia, inscrita no CNPJ sob o nº 60.663.618/0001-63, que atua sob o nome empresarial Rabelo e Machado Advocacia.",
+      "O controlador é a pessoa ou entidade que decide como e por que os dados pessoais são tratados. Para os dados coletados neste site, a controladora é Rabelo e Machado Advocacia, inscrita no CNPJ sob o nº 60.663.618/0001-63.",
       "Endereço profissional: Rua Manoel Maia Neto, 25, Casusa, Princesa Isabel/PB, CEP 58.755-000.",
-    ],
-    pending: [
-      "Número de inscrição da sociedade na OAB, exigido pelo Provimento 205/2021.",
-      "Confirmação do canal oficial de contato do titular (o e-mail do cartão CNPJ difere do divulgado no site).",
     ],
   },
   {
@@ -71,10 +76,6 @@ const sections: Secao[] = [
         ],
       ],
     },
-    pending: [
-      "Confirmar a base legal de cada linha do quadro. A indicação acima é uma proposta técnica, não um parecer.",
-      "Se houver captação para envio de conteúdo ou newsletter, isso precisa de finalidade e base legal próprias.",
-    ],
   },
   {
     id: "formulario",
@@ -96,10 +97,6 @@ const sections: Secao[] = [
       { term: "Entrega de e-mail", text: "Serviço que transporta a mensagem do formulário até a caixa postal do escritório." },
       { term: "Mensageria", text: "WhatsApp, quando o contato acontece por esse canal." },
     ],
-    pending: [
-      "Nomear cada fornecedor efetivamente contratado e anexar a respectiva política.",
-      "Verificar se há contrato ou termo de tratamento de dados firmado com cada operador.",
-    ],
   },
   {
     id: "internacional",
@@ -107,10 +104,6 @@ const sections: Secao[] = [
     paragraphs: [
       "Os serviços de hospedagem e de entrega de e-mail utilizados por este site têm infraestrutura fora do Brasil. Isso significa que os dados enviados pelo formulário podem ser armazenados ou processados em outro país, o que a LGPD classifica como transferência internacional (Art. 33).",
       "Esse ponto é informado aqui porque a lei exige transparência sobre ele, e não porque a transferência seja, por si só, irregular.",
-    ],
-    pending: [
-      "Identificar os países de destino de cada fornecedor.",
-      "Indicar a salvaguarda aplicável entre as hipóteses do Art. 33 (cláusulas contratuais padrão, garantias contratuais específicas ou consentimento destacado).",
     ],
   },
   {
@@ -126,11 +119,6 @@ const sections: Secao[] = [
     title: "8. Por quanto tempo os dados ficam guardados",
     paragraphs: [
       "As mensagens de contato são mantidas pelo tempo necessário para responder à solicitação, para cumprir obrigações legais aplicáveis à advocacia e para a defesa de direitos.",
-    ],
-    pending: [
-      "Definir o prazo concreto de retenção das mensagens que não resultam em contratação.",
-      "Definir o prazo aplicável quando há constituição de relação profissional, considerando as obrigações de guarda próprias da advocacia.",
-      "Definir o prazo de retenção dos registros técnicos de acesso.",
     ],
   },
   {
@@ -163,13 +151,9 @@ const sections: Secao[] = [
     id: "exercer",
     title: "11. Como exercer esses direitos",
     paragraphs: [
-      `Envie a solicitação para ${siteConfig.email}, descrevendo o pedido. Pode ser necessário confirmar sua identidade antes do atendimento, justamente para não entregar dados a quem não é o titular.`,
+      `Envie a solicitação pelo WhatsApp oficial ${siteConfig.whatsappDisplay}, descrevendo o pedido. Pode ser necessário confirmar sua identidade antes do atendimento, justamente para não entregar dados a quem não é o titular.`,
       "A resposta é enviada pelo mesmo canal. Se algum pedido não puder ser atendido, você receberá a justificativa correspondente.",
       "Você também pode apresentar reclamação diretamente à Autoridade Nacional de Proteção de Dados (ANPD).",
-    ],
-    pending: [
-      "Definir o prazo de resposta que será assumido publicamente.",
-      "Confirmar se haverá indicação formal de encarregado (Art. 41). Agentes de pequeno porte podem ser dispensados pela Resolução CD/ANPD nº 2/2022, mas a dispensa deve ser uma decisão consciente.",
     ],
   },
   {
@@ -189,15 +173,13 @@ const sections: Secao[] = [
 ];
 
 export default function PrivacyPage() {
-  const totalPendencias = sections.reduce((soma, s) => soma + (s.pending?.length || 0), 0);
-
   return (
     <main id="topo" className="privacy-page">
       <header className="privacy-hero">
         <div className="container privacy-hero__inner">
           <div>
             <p className="eyebrow">TRANSPARÊNCIA E LGPD</p>
-            <h1>Política de privacidade</h1>
+            <h1><MarkedTitle text="Política de privacidade" mark="privacidade" /></h1>
             <p>Como os dados pessoais informados neste site são tratados.</p>
           </div>
           <ShieldCheck size={72} strokeWidth={1.1} aria-hidden="true" />
@@ -205,27 +187,20 @@ export default function PrivacyPage() {
       </header>
 
       <div className="container privacy-layout">
-        <aside className="privacy-summary">
-          <p className="footer-label">Sumário</p>
+        <details className="privacy-summary" open>
+          <summary>
+            <span className="footer-label">Sumário</span>
+            <small>13 seções</small>
+          </summary>
           <nav aria-label="Sumário da Política de privacidade">
             {sections.map((section) => (
               <a key={section.id} href={`#${section.id}`}>{section.title}</a>
             ))}
           </nav>
           <p className="privacy-date">Última revisão: {ultimaRevisao}</p>
-        </aside>
+        </details>
 
         <article className="privacy-content">
-          <div className="privacy-alert">
-            <strong>Versão de desenvolvimento — não publicar</strong>
-            <p>
-              Restam <strong>{totalPendencias} pontos</strong> que dependem de validação da
-              responsável antes de o site ir ao ar. Eles estão marcados ao longo do texto.
-              Esta política não constitui parecer jurídico e deve ser revisada por quem
-              responde pelo escritório.
-            </p>
-          </div>
-
           <p>
             Esta política descreve como o site <strong>{siteConfig.name}</strong> trata dados
             pessoais. Ela vale para o formulário de contato, para os canais de mensagem
@@ -249,7 +224,9 @@ export default function PrivacyPage() {
                     <tbody>
                       {section.table.rows.map((row) => (
                         <tr key={row[0]}>
-                          {row.map((cell, index) => <td key={index}>{cell}</td>)}
+                          {row.map((cell, index) => (
+                            <td key={index} data-label={section.table?.head[index]}>{cell}</td>
+                          ))}
                         </tr>
                       ))}
                     </tbody>
@@ -268,27 +245,18 @@ export default function PrivacyPage() {
                 </dl>
               )}
 
-              {section.pending && (
-                <div className="privacy-pending">
-                  <p className="privacy-pending__label">
-                    <TriangleAlert size={15} aria-hidden="true" />
-                    A validar antes da publicação
-                  </p>
-                  <ul>
-                    {section.pending.map((item) => <li key={item}>{item}</li>)}
-                  </ul>
-                </div>
-              )}
             </section>
           ))}
 
           <section className="privacy-contact">
-            <Mail aria-hidden="true" />
+            <WhatsAppIcon size={22} />
             <div>
               <h2>Canal de contato</h2>
               <p>
-                Para questões relacionadas à privacidade, escreva para{" "}
-                <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+                Para questões relacionadas à privacidade, fale pelo{" "}
+                <a href={whatsappHref(privacyWhatsAppMessage)} target="_blank" rel="noreferrer">
+                  WhatsApp {siteConfig.whatsappDisplay}
+                </a>.
               </p>
             </div>
           </section>

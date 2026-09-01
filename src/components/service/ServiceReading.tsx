@@ -1,10 +1,12 @@
 import { Reveal } from "@/components/Reveal";
+import { MarkedTitle } from "@/components/MarkedTitle";
 import { ServiceMechanismVisual } from "@/components/ServiceVisuals";
 
 type ServiceReadingProps = {
   slug: string;
   mechanismEyebrow: string;
   mechanismTitle: string;
+  mechanismTitleMark?: string;
   mechanismText: string;
   mechanismNote?: string;
   mechanismItems?: string[];
@@ -17,6 +19,7 @@ export function ServiceReading({
   slug,
   mechanismEyebrow,
   mechanismTitle,
+  mechanismTitleMark,
   mechanismText,
   mechanismNote,
   mechanismItems,
@@ -36,7 +39,7 @@ export function ServiceReading({
           <Reveal>
             <div className="section-heading reading-copy">
               <p className="eyebrow">{mechanismEyebrow}</p>
-              <h2>{mechanismTitle}</h2>
+              <h2><MarkedTitle text={mechanismTitle} mark={mechanismTitleMark} /></h2>
               <p>{mechanismText}</p>
               {mechanismNote && <p>{mechanismNote}</p>}
             </div>
@@ -54,11 +57,12 @@ export function ServiceReading({
               <p>{timelineLead}</p>
             </div>
             {showTimelineRail && (
-              <ol className="timeline-rail">
+              <ol className={`timeline-rail timeline-rail--${slug}`}>
                 {timeline.map((item, index) => (
                   <li key={item}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <span><small>ETAPA</small>{String(index + 1).padStart(2, "0")}</span>
                     <p>{item}</p>
+                    {index < timeline.length - 1 && <i aria-hidden="true" />}
                   </li>
                 ))}
               </ol>
