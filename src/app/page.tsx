@@ -181,8 +181,8 @@ export default function Home() {
           <div className="hero-visual hero-enter hero-enter--delay">
             <figure className="home-hero-image">
               <Image
-                src="/images/ceres/home-hero-v2.webp"
-                alt="Cliente e advogado organizando documentos sobre a mesa"
+                src="/images/ceres/home-hero-v3.png"
+                alt="Documentos, calculadora e computador organizados sobre uma mesa"
                 fill
                 preload
                 sizes="(max-width: 760px) calc(100vw - 30px), (max-width: 1200px) 38vw, 500px"
