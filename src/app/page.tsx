@@ -181,7 +181,7 @@ export default function Home() {
           <div className="hero-visual hero-enter hero-enter--delay">
             <figure className="home-hero-image">
               <Image
-                src="/images/ceres/home-hero-v3.png"
+                src="/images/ceres/home-hero-v3.jpg"
                 alt="Documentos, calculadora e computador organizados sobre uma mesa"
                 fill
                 preload
@@ -263,8 +263,8 @@ export default function Home() {
           <Reveal>
             <figure className="office-photo">
               <Image
-                src="/images/ceres/office-consultation-v2.webp"
-                alt="Advogada em atendimento, ouvindo a cliente e analisando documentos"
+                src="/images/ceres/office-consultation-v3.jpg"
+                alt="Aperto de mãos sobre uma mesa com documentos e uma balança da Justiça"
                 fill
                 sizes="(max-width: 760px) calc(100vw - 30px), 420px"
               />
