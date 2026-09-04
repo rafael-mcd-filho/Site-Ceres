@@ -3,6 +3,7 @@ import { DM_Sans, Literata } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { siteConfig } from "@/lib/site";
+import { ogImageFor } from "@/lib/og";
 import "./globals.css";
 
 const literata = Literata({
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -33,13 +36,25 @@ export const metadata: Metadata = {
     title: "Rabelo e Machado Advocacia",
     description: siteConfig.description,
     url: "/",
+    images: ogImageFor("home"),
   },
   twitter: {
     card: "summary_large_image",
     title: "Rabelo e Machado Advocacia",
     description: siteConfig.description,
+    images: ogImageFor("home"),
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   verification: {
     other: {
       "facebook-domain-verification": "v3d7p2hd68t2dfb8mwhlvo86pd9eaa",
@@ -109,6 +124,7 @@ const structuredData = {
       "@id": `${siteConfig.url}/#website`,
       url: siteConfig.url,
       name: siteConfig.name,
+      alternateName: siteConfig.shortName,
       inLanguage: "pt-BR",
       publisher: { "@id": `${siteConfig.url}/#organization` },
     },
@@ -122,6 +138,13 @@ const structuredData = {
       url: siteConfig.url,
       telephone: `+${siteConfig.whatsappNumber}`,
       description: siteConfig.description,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/apple-icon`,
+        width: 180,
+        height: 180,
+      },
+      image: `${siteConfig.url}/images/ceres/office-consultation-v3.jpg`,
       address: {
         "@type": "PostalAddress",
         streetAddress: siteConfig.address.street,

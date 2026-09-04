@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { MarkedTitle } from "@/components/MarkedTitle";
@@ -8,13 +7,17 @@ import {
   whatsappHref,
   whatsappMessageWithSource,
 } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+const description =
+  "Como o site do escritório Rabelo e Machado Advocacia trata dados pessoais: finalidades, bases legais, compartilhamento, retenção e direitos do titular.";
+
+export const metadata = pageMetadata({
   title: "Política de Privacidade",
-  description:
-    "Como o site do escritório Rabelo e Machado Advocacia trata dados pessoais: finalidades, bases legais, compartilhamento, retenção e direitos do titular.",
-  alternates: { canonical: "/politica-de-privacidade" },
-};
+  description,
+  path: "/politica-de-privacidade",
+  ogSlug: "politica-de-privacidade",
+});
 
 /** Alterar sempre que o conteúdo mudar — a data é exibida ao titular. */
 const ultimaRevisao = "1º de setembro de 2026";

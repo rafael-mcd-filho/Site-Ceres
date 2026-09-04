@@ -19,7 +19,7 @@ export default function AppleIcon() {
         }}
       >
         <div style={{ color: "#d8b54a", fontSize: 82, fontWeight: 600, letterSpacing: -2 }}>
-          CR
+          RM
         </div>
         <div style={{ color: "rgba(255,255,255,0.62)", fontSize: 15, letterSpacing: 4 }}>
           ADVOCACIA

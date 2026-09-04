@@ -86,6 +86,12 @@ export const ogCards = {
     alt: "Registro de marca no INPI | Rabelo e Machado Advocacia",
     palette: "gold",
   },
+  "politica-de-privacidade": {
+    eyebrow: "RABELO E MACHADO ADVOCACIA",
+    title: "Política de Privacidade",
+    footer: "Tratamento de dados · Direitos do titular · Canais de atendimento",
+    alt: "Política de Privacidade | Rabelo e Machado Advocacia",
+  },
 } as const satisfies Record<string, OgCard>;
 
 export type OgSlug = keyof typeof ogCards;

@@ -1,22 +1,16 @@
-import type { Metadata } from "next";
-import { ogImageFor } from "@/lib/og";
 import { ServicePage } from "@/components/ServicePage";
 import { empresarial } from "@/content/services";
+import { pageMetadata } from "@/lib/metadata";
 
 const description =
   "A empresa cresceu ou precisa tomar uma decisão importante? Organize contratos, relações entre sócios e mudanças na operação com apoio jurídico.";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Advocacia Empresarial",
   description,
-  alternates: { canonical: "/direito-empresarial" },
-  openGraph: {
-    title: "Advocacia Empresarial | Rabelo e Machado Advocacia",
-    description,
-    url: "/direito-empresarial",
-    images: ogImageFor("direito-empresarial"),
-  },
-};
+  path: "/direito-empresarial",
+  ogSlug: "direito-empresarial",
+});
 
 export default function DireitoEmpresarialPage() {
   return <ServicePage config={empresarial} />;

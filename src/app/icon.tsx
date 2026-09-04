@@ -21,7 +21,7 @@ export default function Icon() {
           letterSpacing: -1,
         }}
       >
-        CR
+        RM
       </div>
     ),
     size,

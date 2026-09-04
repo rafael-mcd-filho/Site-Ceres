@@ -21,7 +21,7 @@ export const mercadoLivre: ServiceConfig = {
     inlineCta: "continuam exigindo decisão",
     contact: "o bloqueio afetou",
   },
-  serviceName: "Conta bloqueada em marketplace",
+  serviceName: "Conta bloqueada no Mercado Livre",
   serviceDescription:
     "Orientação jurídica para vendedores diante de conta suspensa, anúncios removidos, reputação afetada e valores retidos no Mercado Livre.",
   inlineCtaTitle: "Mesmo com a conta bloqueada, estoque, pedidos e repasses continuam exigindo decisão.",
@@ -104,7 +104,7 @@ export const instagram: ServiceConfig = {
     inlineCta: "o impacto precisa ser registrado",
     contact: "como o perfil era usado",
   },
-  serviceName: "Conta desativada em rede social",
+  serviceName: "Conta desativada no Instagram",
   serviceDescription:
     "Orientação jurídica para perfis do Instagram desativados, invadidos ou restringidos, especialmente quando usados para trabalho, atendimento e vendas.",
   inlineCtaTitle: "Se o perfil é usado para trabalhar, o impacto da perda de acesso precisa ser registrado.",
@@ -187,7 +187,7 @@ export const whatsapp: ServiceConfig = {
     inlineCta: "clientes ficam sem resposta",
     contact: "como o número era usado",
   },
-  serviceName: "Número banido em aplicativo de mensagens",
+  serviceName: "Número banido no WhatsApp",
   serviceDescription:
     "Orientação jurídica diante de número banido, suspensão temporária ou perda de acesso ao WhatsApp usado para atendimento e atividade profissional.",
   inlineCtaTitle: "Quando o WhatsApp concentra o atendimento, clientes ficam sem resposta de uma hora para outra.",

@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import { ogImageFor } from "@/lib/og";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -22,21 +20,19 @@ import {
   whatsappMessageWithSource,
 } from "@/lib/site";
 import { faqPageSchema } from "@/lib/structured-data";
+import { pageMetadata } from "@/lib/metadata";
 
 const description =
   "Advocacia para quem precisa entender um problema no concurso, na empresa, na marca ou em uma conta bloqueada e avaliar o próximo passo com segurança.";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Rabelo e Machado Advocacia | Concursos e Empresarial",
   description,
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Rabelo e Machado Advocacia",
-    description,
-    url: "/",
-    images: ogImageFor("home"),
-  },
-};
+  path: "/",
+  ogSlug: "home",
+  absoluteTitle: true,
+  socialTitle: "Rabelo e Machado Advocacia",
+});
 
 const areas = [
   {

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, CalendarClock, FileText, MessageSquare } from "lucide-react";
@@ -10,13 +9,15 @@ import {
   whatsappHref,
   whatsappMessageWithSource,
 } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Mensagem recebida",
   description: "Confirmação de envio do formulário de contato.",
-  // Página de conversão não deve aparecer na busca nem competir com as de conteúdo.
-  robots: { index: false, follow: false },
-};
+  path: "/obrigado",
+  ogSlug: "home",
+  index: false,
+});
 
 const steps = [
   {
