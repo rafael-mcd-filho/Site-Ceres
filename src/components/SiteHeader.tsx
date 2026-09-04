@@ -160,18 +160,17 @@ export function SiteHeader() {
       >
         <div className="site-header__inner container">
         <Link href="/" className="brand" aria-label="Rabelo e Machado Advocacia, início">
+          {/* A assinatura já traz o nome e o "Advocacia"; texto ao lado seria
+              repetição. A altura vem do CSS, então `width` fica em auto. */}
           <Image
-            src="/images/logo-ceres-rabelo.png"
+            src="/images/logo-rabelo-machado.png"
             alt=""
-            width={38}
-            height={62}
+            width={240}
+            height={44}
             preload
-            className="brand__mark"
+            className="brand__logo"
+            style={{ width: "auto" }}
           />
-          <span className="brand__text">
-            <strong>Rabelo e Machado</strong>
-            <small>Advocacia</small>
-          </span>
         </Link>
 
         <nav className="desktop-nav" aria-label="Navegação principal">

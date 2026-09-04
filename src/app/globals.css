@@ -1161,13 +1161,16 @@
       url("/images/ceres/paper-internal-gold.webp") center / cover;
   }
 
-  /* Header */
+  /* Header
+     Fundo vinho, o mesmo do rodapé: a assinatura é dourada e sobre papel o
+     ouro claro do degradê praticamente sumia. Escuro em cima e embaixo também
+     fecha a página, e é o que o `theme-color` já anunciava para o browser. */
   .site-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid rgba(45, 44, 42, 0.11);
-    background: color-mix(in srgb, var(--paper-50) 92%, transparent);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: color-mix(in srgb, var(--graphite-950) 90%, transparent);
     backdrop-filter: blur(18px);
     transition:
       background var(--duration-base) var(--ease-out),
@@ -1178,30 +1181,16 @@
   /* Fundo opaco ao rolar dispensa o blur — e é justamente durante o scroll
      que o `backdrop-filter` custa mais repaint em aparelho fraco. */
   .site-header.is-scrolled {
-    border-bottom-color: rgba(45, 44, 42, 0.14);
-    background: var(--paper-50);
-    backdrop-filter: none;
-    box-shadow: 0 8px 24px -6px rgba(45, 38, 31, 0.12);
-  }
-
-  /* Header sobre o menu mobile aberto: fundo escuro para o X continuar legível. */
-  .site-header.is-menu-open {
-    border-bottom-color: rgba(255, 255, 255, 0.13);
+    border-bottom-color: rgba(255, 255, 255, 0.14);
     background: var(--graphite-950);
+    backdrop-filter: none;
+    box-shadow: 0 8px 24px -6px rgba(28, 4, 8, 0.4);
+  }
+
+  /* Menu mobile aberto: a barra já é escura, só a sombra sai de cena para o
+     header e o overlay virarem uma superfície só. */
+  .site-header.is-menu-open {
     box-shadow: none;
-  }
-
-  .site-header.is-menu-open .brand__text strong {
-    color: var(--white);
-  }
-
-  .site-header.is-menu-open .brand__text small {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .site-header.is-menu-open .menu-toggle {
-    color: var(--white);
-    border-color: rgba(255, 255, 255, 0.3);
   }
 
   /* Altura fixa de propósito: o header é sticky e ocupa espaço no fluxo, então
@@ -1215,43 +1204,22 @@
     gap: 2rem;
   }
 
-  .site-header.is-scrolled .brand__mark {
-    width: 26px;
-    height: 42px;
+  .site-header.is-scrolled .brand__logo {
+    height: 34px;
   }
 
   .brand {
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
-    gap: 0.72rem;
   }
 
-  .brand__mark {
-    width: 32px;
-    height: 52px;
-    object-fit: cover;
-    transition: width 240ms ease, height 240ms ease;
-  }
-
-  .brand__text {
-    display: grid;
-    line-height: 1;
-  }
-
-  .brand__text strong {
-    font-family: var(--font-serif);
-    font-size: var(--fs-base);
-    font-weight: 600;
-  }
-
-  .brand__text small {
-    margin-top: 0.35rem;
-    color: var(--graphite-500);
-    font-size: var(--fs-2xs);
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+  /* A assinatura é horizontal e já contém o nome do escritório: quem manda no
+     tamanho é a altura, e a largura acompanha para o traço não distorcer. */
+  .brand__logo {
+    width: auto;
+    height: 42px;
+    transition: height 240ms ease;
   }
 
   /* A navegação segue o mesmo raio intermediário dos demais controles. */
@@ -1261,23 +1229,23 @@
     align-items: center;
     gap: 0.15rem;
     padding: 5px;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(255, 255, 255, 0.13);
     border-radius: var(--radius-control-group);
-    background: color-mix(in srgb, var(--white) 70%, transparent);
-    box-shadow: 0 2px 14px rgba(45, 38, 31, 0.05);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: none;
     transition: background 240ms ease, border-color 240ms ease;
   }
 
   .site-header.is-scrolled .desktop-nav {
-    background: color-mix(in srgb, var(--white) 92%, transparent);
-    border-color: rgba(45, 44, 42, 0.14);
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.18);
   }
 
   .desktop-nav a {
     position: relative;
     padding: 0.6rem clamp(0.7rem, 1.2vw, 1.05rem);
     border-radius: var(--radius-control);
-    color: var(--graphite-700);
+    color: rgba(255, 255, 255, 0.74);
     font-size: var(--fs-sm);
     font-weight: 600;
     white-space: nowrap;
@@ -1291,8 +1259,8 @@
   }
 
   .desktop-nav a:hover {
-    color: var(--graphite-950);
-    background: color-mix(in srgb, var(--accent, var(--wine-750)) 9%, transparent);
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .desktop-nav a[aria-current="page"] {
@@ -1312,7 +1280,7 @@
     padding: 0.6rem clamp(0.7rem, 1.2vw, 1.05rem);
     border: 0;
     border-radius: var(--radius-control);
-    color: var(--graphite-700);
+    color: rgba(255, 255, 255, 0.74);
     background: transparent;
     font-size: var(--fs-sm);
     font-weight: 600;
@@ -1326,8 +1294,8 @@
   }
 
   .nav-group__trigger:hover {
-    color: var(--graphite-950);
-    background: color-mix(in srgb, var(--accent, var(--wine-750)) 9%, transparent);
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .nav-group__trigger svg {
@@ -1431,9 +1399,9 @@
     height: 46px;
     margin-left: auto;
     place-items: center;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: var(--radius-control);
-    color: var(--graphite-900);
+    color: var(--white);
     background: transparent;
   }
 
@@ -1497,8 +1465,12 @@
     border-color: var(--paper-50);
   }
 
+  /* Vinho fixo em vez do `--accent` da página: o botão precisa destacar do
+     próprio fundo da barra, que agora é o vinho escuro. O fio de latão dá a
+     borda os 3:1 que só o preenchimento vinho sobre vinho não alcançava. */
   .header-cta {
-    --accent: var(--graphite-950);
+    --accent: var(--wine-750);
+    border-color: color-mix(in srgb, var(--brass) 55%, transparent);
   }
 
   /* CTA com selo — o recorte interno repete a geometria do botão em escala
@@ -4588,7 +4560,7 @@
   }
 
   .site-footer__brand img {
-    width: 82px;
+    width: 208px;
     height: auto;
     margin-bottom: 1.5rem;
   }
@@ -5384,13 +5356,8 @@
       height: 44px;
     }
 
-    .brand__mark {
-      width: 23px;
-      height: 38px;
-    }
-
-    .brand__text strong {
-      font-size: var(--fs-md);
+    .brand__logo {
+      height: 30px;
     }
 
     .mobile-menu {

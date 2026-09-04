@@ -140,9 +140,9 @@ const structuredData = {
       description: siteConfig.description,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/apple-icon`,
-        width: 180,
-        height: 180,
+        url: `${siteConfig.url}/images/icone-rabelo-machado.png`,
+        width: 512,
+        height: 512,
       },
       image: `${siteConfig.url}/images/ceres/office-consultation-v3.jpg`,
       address: {

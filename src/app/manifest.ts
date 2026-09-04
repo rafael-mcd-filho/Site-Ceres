@@ -11,11 +11,12 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#fbf7ef",
     theme_color: "#30070e",
     lang: "pt-BR",
-    // Ícones quadrados gerados por `icon.tsx` e `apple-icon.tsx`. O logo
-    // original é retrato (375x603) e é rejeitado como ícone de aplicativo.
+    // Servidos de `public/` em vez de `app/icon.png`: o caminho das convenções
+    // de metadata carrega hash de cache, e o manifest precisa de URL estável.
+    // Fundo vinho chapado porque o Android compõe o ícone sobre a tela inicial.
     icons: [
-      { src: "/icon", sizes: "64x64", type: "image/png" },
-      { src: "/apple-icon", sizes: "180x180", type: "image/png" },
+      { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
     ],
   };
 }

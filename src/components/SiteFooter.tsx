@@ -15,11 +15,11 @@ export function SiteFooter() {
       <div className="container site-footer__grid">
         <div className="site-footer__brand">
           <Image
-            src="/images/logo-ceres-rabelo.png"
+            src="/images/logo-rabelo-machado.png"
             alt="Rabelo e Machado Advocacia"
-            width={94}
-            height={139}
-            sizes="94px"
+            width={240}
+            height={44}
+            sizes="208px"
             style={{ height: "auto" }}
           />
           <p>
